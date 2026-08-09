@@ -1,0 +1,6734 @@
+[
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 2,
+    "derailed_support": 584,
+    "healthy_support": 0,
+    "support_ratio": 584.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_001",
+    "representative_conversations": [
+      "100009118.8296.8296",
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 2,
+    "derailed_support": 529,
+    "healthy_support": 1,
+    "support_ratio": 529.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_002",
+    "representative_conversations": [
+      "102390554.518.518",
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "105990673.17640.17640",
+      "106086467.6813.6813"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 2,
+    "derailed_support": 515,
+    "healthy_support": 1,
+    "support_ratio": 515.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_003",
+    "representative_conversations": [
+      "102390554.518.518",
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 448,
+    "healthy_support": 0,
+    "support_ratio": 448.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_004",
+    "representative_conversations": [
+      "100009118.8296.8296",
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 421,
+    "healthy_support": 0,
+    "support_ratio": 421.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_005",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 381,
+    "healthy_support": 0,
+    "support_ratio": 381.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_006",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10905256.85840.85840",
+      "109376539.2407.2407"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 374,
+    "healthy_support": 0,
+    "support_ratio": 374.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_007",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "105990673.17640.17640",
+      "108953813.18115.18115",
+      "10905256.85840.85840"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 366,
+    "healthy_support": 0,
+    "support_ratio": 366.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_008",
+    "representative_conversations": [
+      "102390554.518.518",
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "108953813.18115.18115"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 349,
+    "healthy_support": 0,
+    "support_ratio": 349.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_009",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "106086467.6813.6813",
+      "108953813.18115.18115",
+      "10900408.9470.9470",
+      "10905256.85840.85840"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 309,
+    "healthy_support": 0,
+    "support_ratio": 309.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_010",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 294,
+    "healthy_support": 0,
+    "support_ratio": 294.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_011",
+    "representative_conversations": [
+      "102390554.518.518",
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 291,
+    "healthy_support": 0,
+    "support_ratio": 291.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_012",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "105990673.17640.17640"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 279,
+    "healthy_support": 0,
+    "support_ratio": 279.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_013",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "109376539.2407.2407"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 258,
+    "healthy_support": 0,
+    "support_ratio": 258.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_014",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10905256.85840.85840",
+      "109626944.13153.13153"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 243,
+    "healthy_support": 0,
+    "support_ratio": 243.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_015",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10905256.85840.85840",
+      "109626944.13153.13153"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 236,
+    "healthy_support": 0,
+    "support_ratio": 236.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_016",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "108953813.18115.18115",
+      "10905256.85840.85840",
+      "109626944.13153.13153"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 228,
+    "healthy_support": 0,
+    "support_ratio": 228.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_017",
+    "representative_conversations": [
+      "102390554.518.518",
+      "105662054.73251.73251",
+      "109203891.11364.11364",
+      "110260019.134313.134313",
+      "112689148.5261.5261"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 226,
+    "healthy_support": 0,
+    "support_ratio": 226.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_018",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "108953813.18115.18115",
+      "10900408.9470.9470",
+      "10905256.85840.85840",
+      "109626944.13153.13153"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 225,
+    "healthy_support": 0,
+    "support_ratio": 225.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_019",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "105990673.17640.17640",
+      "10905256.85840.85840",
+      "109203891.11364.11364"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 209,
+    "healthy_support": 0,
+    "support_ratio": 209.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_020",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "11538905.109689.109689",
+      "116164674.34329.34813"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 204,
+    "healthy_support": 0,
+    "support_ratio": 204.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_021",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "110260019.134313.134313",
+      "115972197.0.0",
+      "116164674.34329.34813"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 203,
+    "healthy_support": 0,
+    "support_ratio": 203.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_022",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10905256.85840.85840"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 197,
+    "healthy_support": 0,
+    "support_ratio": 197.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_023",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "109626944.13153.13153",
+      "110260019.134313.134313",
+      "112689148.5261.5261"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 188,
+    "healthy_support": 0,
+    "support_ratio": 188.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_024",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10942836.99038.99038"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 185,
+    "healthy_support": 0,
+    "support_ratio": 185.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_025",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "108953813.18115.18115",
+      "10900408.9470.9470",
+      "10905256.85840.85840",
+      "110260019.134313.134313"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 181,
+    "healthy_support": 0,
+    "support_ratio": 181.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_026",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 178,
+    "healthy_support": 0,
+    "support_ratio": 178.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_027",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "108953813.18115.18115",
+      "10905256.85840.85840",
+      "112689148.5261.5261",
+      "11538354.18483.18483"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 173,
+    "healthy_support": 0,
+    "support_ratio": 173.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_028",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105990673.17640.17640",
+      "10749910.44464.44464",
+      "10942836.99038.99038",
+      "11538905.109689.109689"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 161,
+    "healthy_support": 0,
+    "support_ratio": 161.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_029",
+    "representative_conversations": [
+      "103044830.207.207",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10942836.99038.99038",
+      "11538905.109689.109689"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 161,
+    "healthy_support": 0,
+    "support_ratio": 161.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_030",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10905256.85840.85840",
+      "109626944.13153.13153"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 156,
+    "healthy_support": 0,
+    "support_ratio": 156.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_031",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10942836.99038.99038"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 150,
+    "healthy_support": 0,
+    "support_ratio": 150.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_032",
+    "representative_conversations": [
+      "102390554.518.518",
+      "104271206.32088.32088",
+      "10749910.44464.44464",
+      "10900408.9470.9470",
+      "110260019.134313.134313"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 145,
+    "healthy_support": 0,
+    "support_ratio": 145.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_033",
+    "representative_conversations": [
+      "102390554.518.518",
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "117313335.19115.19115"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 141,
+    "healthy_support": 0,
+    "support_ratio": 141.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_034",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "109626944.13153.13153",
+      "112689148.5261.5261"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 137,
+    "healthy_support": 0,
+    "support_ratio": 137.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_035",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "11538905.109689.109689",
+      "116164674.34329.34813"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 133,
+    "healthy_support": 0,
+    "support_ratio": 133.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_036",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "110260019.134313.134313",
+      "115972197.0.0",
+      "116164674.34329.34813"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 132,
+    "healthy_support": 0,
+    "support_ratio": 132.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_037",
+    "representative_conversations": [
+      "10749910.44464.44464",
+      "109376539.2407.2407",
+      "110260019.134313.134313",
+      "11538905.109689.109689",
+      "117313335.19115.19115"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 130,
+    "healthy_support": 0,
+    "support_ratio": 130.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_038",
+    "representative_conversations": [
+      "102390554.518.518",
+      "103044830.207.207",
+      "104859769.55176.55176",
+      "110260019.134313.134313",
+      "122434890.15100.15100"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 123,
+    "healthy_support": 0,
+    "support_ratio": 123.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_039",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "109203891.11364.11364",
+      "11538354.18483.18483",
+      "11805402.152164.152164",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 123,
+    "healthy_support": 0,
+    "support_ratio": 123.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_040",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "109626944.13153.13153",
+      "110260019.134313.134313",
+      "112689148.5261.5261"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 120,
+    "healthy_support": 0,
+    "support_ratio": 120.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_041",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "11538905.109689.109689",
+      "116164674.34329.34813",
+      "117313335.19115.19115"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 116,
+    "healthy_support": 0,
+    "support_ratio": 116.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_042",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "105990673.17640.17640",
+      "109626944.13153.13153",
+      "112689148.5261.5261"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 115,
+    "healthy_support": 0,
+    "support_ratio": 115.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_043",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "116164674.34329.34813",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 114,
+    "healthy_support": 0,
+    "support_ratio": 114.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_044",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "117313335.19115.19115",
+      "11805402.152164.152164"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 113,
+    "healthy_support": 0,
+    "support_ratio": 113.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_045",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "108953813.18115.18115",
+      "10900408.9470.9470",
+      "10905256.85840.85840",
+      "110260019.134313.134313"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 109,
+    "healthy_support": 0,
+    "support_ratio": 109.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_046",
+    "representative_conversations": [
+      "10749910.44464.44464",
+      "10905256.85840.85840",
+      "109626944.13153.13153",
+      "112689148.5261.5261",
+      "11538905.109689.109689"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 109,
+    "healthy_support": 0,
+    "support_ratio": 109.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_047",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "117313335.19115.19115",
+      "11805402.152164.152164"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 108,
+    "healthy_support": 0,
+    "support_ratio": 108.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_048",
+    "representative_conversations": [
+      "110260019.134313.134313",
+      "11538354.18483.18483",
+      "119870947.14802.14802",
+      "12941035.584.584",
+      "140960334.44081.44081"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 108,
+    "healthy_support": 0,
+    "support_ratio": 108.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_049",
+    "representative_conversations": [
+      "103044830.207.207",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10942836.99038.99038",
+      "11538905.109689.109689"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 107,
+    "healthy_support": 0,
+    "support_ratio": 107.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_050",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "108953813.18115.18115",
+      "10905256.85840.85840",
+      "112689148.5261.5261",
+      "116164674.34329.34813"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 104,
+    "healthy_support": 0,
+    "support_ratio": 104.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_051",
+    "representative_conversations": [
+      "10905256.85840.85840",
+      "115972197.0.0",
+      "117313335.19115.19115",
+      "119870947.14802.14802",
+      "131348475.17100.17100"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 103,
+    "healthy_support": 0,
+    "support_ratio": 103.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_052",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "11538354.18483.18483",
+      "117313335.19115.19115"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 102,
+    "healthy_support": 0,
+    "support_ratio": 102.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_053",
+    "representative_conversations": [
+      "104859769.55176.55176",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10942836.99038.99038",
+      "112689148.5261.5261"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 101,
+    "healthy_support": 0,
+    "support_ratio": 101.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_054",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104859769.55176.55176",
+      "117313335.19115.19115",
+      "122434890.15100.15100",
+      "123707784.1822.1822"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 101,
+    "healthy_support": 0,
+    "support_ratio": 101.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_055",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104271206.32088.32088",
+      "104859769.55176.55176",
+      "10749910.44464.44464",
+      "115386656.79212.79212"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 91,
+    "healthy_support": 0,
+    "support_ratio": 91.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_056",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "110260019.134313.134313",
+      "11805402.152164.152164",
+      "131348475.17100.17100"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 90,
+    "healthy_support": 0,
+    "support_ratio": 90.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_057",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "112689148.5261.5261",
+      "116164674.34329.34813",
+      "11827530.53683.53683"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 89,
+    "healthy_support": 0,
+    "support_ratio": 89.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_058",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "116164674.34329.34813",
+      "119870947.14802.14802",
+      "12941035.584.584"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 87,
+    "healthy_support": 0,
+    "support_ratio": 87.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_059",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "109626944.13153.13153",
+      "112689148.5261.5261",
+      "131348475.17100.17100"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 86,
+    "healthy_support": 0,
+    "support_ratio": 86.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_060",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "116164674.34329.34813",
+      "11805402.152164.152164",
+      "131348475.17100.17100",
+      "134118434.238221.238221"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 83,
+    "healthy_support": 0,
+    "support_ratio": 83.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_061",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "116164674.34329.34813",
+      "117313335.19115.19115",
+      "11805402.152164.152164"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 83,
+    "healthy_support": 0,
+    "support_ratio": 83.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_062",
+    "representative_conversations": [
+      "10900408.9470.9470",
+      "10905256.85840.85840",
+      "11538354.18483.18483",
+      "116164674.34329.34813",
+      "11827530.53683.53683"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 82,
+    "healthy_support": 0,
+    "support_ratio": 82.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_063",
+    "representative_conversations": [
+      "10749910.44464.44464",
+      "110260019.134313.134313",
+      "11538905.109689.109689",
+      "119870947.14802.14802",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 81,
+    "healthy_support": 0,
+    "support_ratio": 81.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_064",
+    "representative_conversations": [
+      "103044830.207.207",
+      "105662054.73251.73251",
+      "10749910.44464.44464",
+      "10942836.99038.99038",
+      "11538905.109689.109689"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 81,
+    "healthy_support": 0,
+    "support_ratio": 81.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_065",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "108953813.18115.18115",
+      "11538354.18483.18483",
+      "116164674.34329.34813",
+      "11805402.152164.152164"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 79,
+    "healthy_support": 0,
+    "support_ratio": 79.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_066",
+    "representative_conversations": [
+      "10905256.85840.85840",
+      "116164674.34329.34813",
+      "131348475.17100.17100",
+      "143371769.16045.16045",
+      "153999042.1460.1460"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 79,
+    "healthy_support": 0,
+    "support_ratio": 79.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_067",
+    "representative_conversations": [
+      "103044830.207.207",
+      "10749910.44464.44464",
+      "11538905.109689.109689",
+      "122434890.15100.15100",
+      "123707784.1822.1822"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 78,
+    "healthy_support": 0,
+    "support_ratio": 78.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_068",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "10749910.44464.44464",
+      "110260019.134313.134313",
+      "11538905.109689.109689",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 76,
+    "healthy_support": 0,
+    "support_ratio": 76.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_069",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "10905256.85840.85840",
+      "112689148.5261.5261",
+      "11538354.18483.18483",
+      "116164674.34329.34813"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 75,
+    "healthy_support": 0,
+    "support_ratio": 75.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_070",
+    "representative_conversations": [
+      "104859769.55176.55176",
+      "10749910.44464.44464",
+      "10942836.99038.99038",
+      "112689148.5261.5261",
+      "11538905.109689.109689"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 73,
+    "healthy_support": 0,
+    "support_ratio": 73.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_071",
+    "representative_conversations": [
+      "102390554.518.518",
+      "134257476.56363.56363",
+      "140960334.44081.44081",
+      "14373957.12233.12233",
+      "14711282.73346.73346"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 72,
+    "healthy_support": 0,
+    "support_ratio": 72.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_072",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "117313335.19115.19115",
+      "119870947.14802.14802"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 71,
+    "healthy_support": 0,
+    "support_ratio": 71.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_073",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "128836290.41741.41741",
+      "134257476.56363.56363",
+      "13533876.64395.64395",
+      "13753778.60887.60887"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 67,
+    "healthy_support": 0,
+    "support_ratio": 67.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_074",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "119870947.14802.14802",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 67,
+    "healthy_support": 0,
+    "support_ratio": 67.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_075",
+    "representative_conversations": [
+      "104271206.32088.32088",
+      "110260019.134313.134313",
+      "11538905.109689.109689",
+      "128836290.41741.41741",
+      "143371769.16045.16045"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 65,
+    "healthy_support": 0,
+    "support_ratio": 65.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_076",
+    "representative_conversations": [
+      "104859769.55176.55176",
+      "122434890.15100.15100",
+      "128836290.41741.41741",
+      "132479127.13408.13408",
+      "14373957.12233.12233"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 64,
+    "healthy_support": 0,
+    "support_ratio": 64.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_077",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "117313335.19115.19115",
+      "123376712.21847.21847"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 64,
+    "healthy_support": 0,
+    "support_ratio": 64.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_078",
+    "representative_conversations": [
+      "10900408.9470.9470",
+      "110260019.134313.134313",
+      "141210424.27362.27362",
+      "143371769.16045.16045",
+      "14711282.73346.73346"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 62,
+    "healthy_support": 0,
+    "support_ratio": 62.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_079",
+    "representative_conversations": [
+      "10749910.44464.44464",
+      "11538905.109689.109689",
+      "128836290.41741.41741",
+      "12941035.584.584",
+      "143371769.16045.16045"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 62,
+    "healthy_support": 0,
+    "support_ratio": 62.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_080",
+    "representative_conversations": [
+      "110260019.134313.134313",
+      "119870947.14802.14802",
+      "140960334.44081.44081",
+      "14711282.73346.73346",
+      "153182005.36331.36331"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 61,
+    "healthy_support": 0,
+    "support_ratio": 61.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_081",
+    "representative_conversations": [
+      "103044830.207.207",
+      "104859769.55176.55176",
+      "110260019.134313.134313",
+      "122434890.15100.15100",
+      "12849936.3317.3317"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 60,
+    "healthy_support": 0,
+    "support_ratio": 60.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_082",
+    "representative_conversations": [
+      "10749910.44464.44464",
+      "11538905.109689.109689",
+      "117313335.19115.19115",
+      "119870947.14802.14802",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 60,
+    "healthy_support": 0,
+    "support_ratio": 60.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_083",
+    "representative_conversations": [
+      "103044830.207.207",
+      "128836290.41741.41741",
+      "132479127.13408.13408",
+      "134257476.56363.56363",
+      "14373957.12233.12233"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 2,
+    "derailed_support": 58,
+    "healthy_support": 0,
+    "support_ratio": 58.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_084",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "136289256.2567.2567",
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 54,
+    "healthy_support": 0,
+    "support_ratio": 54.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_085",
+    "representative_conversations": [
+      "117313335.19115.19115",
+      "13768808.75261.75261",
+      "143371769.16045.16045",
+      "14711282.73346.73346",
+      "155938299.9630.9630"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 53,
+    "healthy_support": 0,
+    "support_ratio": 53.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_086",
+    "representative_conversations": [
+      "109203891.11364.11364",
+      "13533876.64395.64395",
+      "14276135.641.641",
+      "14373957.12233.12233",
+      "152508378.4331.4331"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 52,
+    "healthy_support": 0,
+    "support_ratio": 52.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_087",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "11805402.152164.152164",
+      "128836290.41741.41741",
+      "12941035.584.584",
+      "13533876.64395.64395"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 49,
+    "healthy_support": 0,
+    "support_ratio": 49.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_088",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "117313335.19115.19115",
+      "119870947.14802.14802",
+      "128836290.41741.41741",
+      "131348475.17100.17100"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 49,
+    "healthy_support": 0,
+    "support_ratio": 49.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_089",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "112689148.5261.5261",
+      "131348475.17100.17100",
+      "13753778.60887.60887",
+      "147033805.6582.6582"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 49,
+    "healthy_support": 0,
+    "support_ratio": 49.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_090",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "11805402.152164.152164",
+      "128836290.41741.41741",
+      "13533876.64395.64395",
+      "13753778.60887.60887"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 49,
+    "healthy_support": 0,
+    "support_ratio": 49.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_091",
+    "representative_conversations": [
+      "102390554.518.518",
+      "104859769.55176.55176",
+      "128836290.41741.41741",
+      "143877368.8.8",
+      "157382125.6180.6180"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 48,
+    "healthy_support": 0,
+    "support_ratio": 48.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_092",
+    "representative_conversations": [
+      "103044830.207.207",
+      "117313335.19115.19115",
+      "122434890.15100.15100",
+      "123707784.1822.1822",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 48,
+    "healthy_support": 0,
+    "support_ratio": 48.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_093",
+    "representative_conversations": [
+      "11538905.109689.109689",
+      "117313335.19115.19115",
+      "128836290.41741.41741",
+      "143371769.16045.16045",
+      "155938299.9630.9630"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 48,
+    "healthy_support": 0,
+    "support_ratio": 48.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_094",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "136289256.2567.2567",
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 46,
+    "healthy_support": 0,
+    "support_ratio": 46.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_095",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "112689148.5261.5261",
+      "117313335.19115.19115",
+      "119870947.14802.14802",
+      "128836290.41741.41741"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 46,
+    "healthy_support": 0,
+    "support_ratio": 46.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_096",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "117313335.19115.19115",
+      "11805402.152164.152164",
+      "131348475.17100.17100",
+      "13768808.75261.75261"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 46,
+    "healthy_support": 0,
+    "support_ratio": 46.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_097",
+    "representative_conversations": [
+      "110260019.134313.134313",
+      "119870947.14802.14802",
+      "12941035.584.584",
+      "155938299.9630.9630",
+      "190740331.1181.1181"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 46,
+    "healthy_support": 0,
+    "support_ratio": 46.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_098",
+    "representative_conversations": [
+      "11538354.18483.18483",
+      "12941035.584.584",
+      "14276135.641.641",
+      "175543533.9096.9096",
+      "176567566.14408.14408"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 45,
+    "healthy_support": 0,
+    "support_ratio": 45.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_099",
+    "representative_conversations": [
+      "102390554.518.518",
+      "134257476.56363.56363",
+      "140960334.44081.44081",
+      "14373957.12233.12233",
+      "14711282.73346.73346"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 44,
+    "healthy_support": 0,
+    "support_ratio": 44.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_100",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "11538354.18483.18483",
+      "11805402.152164.152164",
+      "134257476.56363.56363",
+      "13753778.60887.60887"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 44,
+    "healthy_support": 0,
+    "support_ratio": 44.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_101",
+    "representative_conversations": [
+      "11538354.18483.18483",
+      "14711282.73346.73346",
+      "153182005.36331.36331",
+      "163192049.4586.4586",
+      "19142390.163.163"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 44,
+    "healthy_support": 0,
+    "support_ratio": 44.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_102",
+    "representative_conversations": [
+      "110260019.134313.134313",
+      "128836290.41741.41741",
+      "153182005.36331.36331",
+      "157382125.6180.6180",
+      "157729763.7883.7883"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 41,
+    "healthy_support": 0,
+    "support_ratio": 41.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_103",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "136289256.2567.2567",
+      "172326135.17849.17849",
+      "215630746.123524.123524",
+      "229002613.333487.333487"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 41,
+    "healthy_support": 0,
+    "support_ratio": 41.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_104",
+    "representative_conversations": [
+      "110260019.134313.134313",
+      "119870947.14802.14802",
+      "14711282.73346.73346",
+      "155938299.9630.9630",
+      "193787824.11038.11038"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 40,
+    "healthy_support": 0,
+    "support_ratio": 40.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_105",
+    "representative_conversations": [
+      "103044830.207.207",
+      "123707784.1822.1822",
+      "128836290.41741.41741",
+      "132479127.13408.13408",
+      "14373957.12233.12233"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 40,
+    "healthy_support": 0,
+    "support_ratio": 40.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_106",
+    "representative_conversations": [
+      "102390554.518.518",
+      "110260019.134313.134313",
+      "128836290.41741.41741",
+      "131373413.24835.24835",
+      "131373413.25367.25367"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 39,
+    "healthy_support": 0,
+    "support_ratio": 39.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_107",
+    "representative_conversations": [
+      "110260019.134313.134313",
+      "11538354.18483.18483",
+      "14711282.73346.73346",
+      "153182005.36331.36331",
+      "176567566.14408.14408"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 38,
+    "healthy_support": 0,
+    "support_ratio": 38.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_108",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "112689148.5261.5261",
+      "117313335.19115.19115",
+      "131348475.17100.17100",
+      "13753778.60887.60887"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 38,
+    "healthy_support": 0,
+    "support_ratio": 38.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_109",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "110260019.134313.134313",
+      "112689148.5261.5261",
+      "11805402.152164.152164",
+      "131348475.17100.17100"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 37,
+    "healthy_support": 0,
+    "support_ratio": 37.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_110",
+    "representative_conversations": [
+      "104859769.55176.55176",
+      "117313335.19115.19115",
+      "128836290.41741.41741",
+      "13768808.75261.75261",
+      "169405937.10029.9152"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 37,
+    "healthy_support": 0,
+    "support_ratio": 37.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_111",
+    "representative_conversations": [
+      "105662054.73251.73251",
+      "112689148.5261.5261",
+      "11805402.152164.152164",
+      "123376712.21847.21847",
+      "131348475.17100.17100"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 36,
+    "healthy_support": 0,
+    "support_ratio": 36.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_112",
+    "representative_conversations": [
+      "128836290.41741.41741",
+      "155938299.9630.9630",
+      "167788255.32606.32606",
+      "179329338.5954.5954",
+      "192790900.20210.20210"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 36,
+    "healthy_support": 0,
+    "support_ratio": 36.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_113",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "31254071.3384.3384",
+      "353086396.18088.18088",
+      "363633613.38207.38207"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 34,
+    "healthy_support": 0,
+    "support_ratio": 34.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_114",
+    "representative_conversations": [
+      "11538354.18483.18483",
+      "14276135.641.641",
+      "155938299.9630.9630",
+      "19142390.163.163",
+      "247472127.253579.253579"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 33,
+    "healthy_support": 0,
+    "support_ratio": 33.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_115",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849",
+      "235454922.171854.171854",
+      "267692160.155951.155951"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 33,
+    "healthy_support": 0,
+    "support_ratio": 33.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_116",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "136289256.2567.2567",
+      "15417559.14946.14946",
+      "215630746.123524.123524",
+      "229002613.333487.333487"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 32,
+    "healthy_support": 0,
+    "support_ratio": 32.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_117",
+    "representative_conversations": [
+      "103044830.207.207",
+      "128836290.41741.41741",
+      "169405937.10029.9152",
+      "172326135.17849.17849",
+      "17971546.10.10"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 32,
+    "healthy_support": 0,
+    "support_ratio": 32.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_118",
+    "representative_conversations": [
+      "117313335.19115.19115",
+      "128836290.41741.41741",
+      "13768808.75261.75261",
+      "14711282.73346.73346",
+      "155938299.9630.9630"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 32,
+    "healthy_support": 0,
+    "support_ratio": 32.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_119",
+    "representative_conversations": [
+      "14373957.12233.12233",
+      "199347779.28791.28791",
+      "201376388.56.56",
+      "207334293.15906.15906",
+      "229718577.108421.108421"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 31,
+    "healthy_support": 0,
+    "support_ratio": 31.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_120",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "172326135.17849.17849",
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "267692160.155951.155951"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 30,
+    "healthy_support": 0,
+    "support_ratio": 30.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_121",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "31254071.3384.3384",
+      "353086396.18088.18088",
+      "363633613.38207.38207"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 27,
+    "healthy_support": 0,
+    "support_ratio": 27.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_122",
+    "representative_conversations": [
+      "14373957.12233.12233",
+      "172326135.17849.17849",
+      "199347779.28791.28791",
+      "23693917.339.339",
+      "318884405.42022.42022"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 27,
+    "healthy_support": 0,
+    "support_ratio": 27.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_123",
+    "representative_conversations": [
+      "153182005.36331.36331",
+      "199347779.28791.28791",
+      "218968771.81560.81560",
+      "298632259.93220.93220",
+      "318884405.42022.42022"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 26,
+    "healthy_support": 0,
+    "support_ratio": 26.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_124",
+    "representative_conversations": [
+      "102390554.518.518",
+      "172326135.17849.17849",
+      "185229633.7636.7636",
+      "186964574.2439.2439",
+      "199347779.28791.28791"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEUTRAL -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 26,
+    "healthy_support": 0,
+    "support_ratio": 26.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_125",
+    "representative_conversations": [
+      "134257476.56363.56363",
+      "14373957.12233.12233",
+      "185217516.25785.25785",
+      "199347779.28791.28791",
+      "218968771.81560.81560"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 26,
+    "healthy_support": 0,
+    "support_ratio": 26.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_126",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "136289256.2567.2567",
+      "15417559.14946.14946",
+      "215630746.123524.123524",
+      "229002613.333487.333487"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 25,
+    "healthy_support": 0,
+    "support_ratio": 25.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_127",
+    "representative_conversations": [
+      "136289256.2567.2567",
+      "172326135.17849.17849",
+      "229002613.333487.333487",
+      "267692160.155951.155951",
+      "30766025.100936.100936"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 24,
+    "healthy_support": 0,
+    "support_ratio": 24.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_128",
+    "representative_conversations": [
+      "134257476.56363.56363",
+      "14373957.12233.12233",
+      "14711282.73346.73346",
+      "153182005.36331.36331",
+      "172326135.17849.17849"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 23,
+    "healthy_support": 0,
+    "support_ratio": 23.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_129",
+    "representative_conversations": [
+      "140960334.44081.44081",
+      "14711282.73346.73346",
+      "266938227.4116.4116",
+      "323819947.7048.7048",
+      "363602652.744.744"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 21,
+    "healthy_support": 0,
+    "support_ratio": 21.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_130",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "353086396.18088.18088",
+      "363633613.38207.38207",
+      "371804001.43122.43122"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 21,
+    "healthy_support": 0,
+    "support_ratio": 21.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_131",
+    "representative_conversations": [
+      "14711282.73346.73346",
+      "199347779.28791.28791",
+      "201376388.56.56",
+      "229718577.108421.108421",
+      "298632259.93220.93220"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 21,
+    "healthy_support": 0,
+    "support_ratio": 21.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_132",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849",
+      "267692160.155951.155951",
+      "30766025.100936.100936"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 20,
+    "healthy_support": 0,
+    "support_ratio": 20.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_133",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "136289256.2567.2567",
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "30766025.100936.100936"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 19,
+    "healthy_support": 0,
+    "support_ratio": 19.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_134",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849",
+      "235454922.171854.171854",
+      "267692160.155951.155951"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 19,
+    "healthy_support": 0,
+    "support_ratio": 19.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_135",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "229002613.333487.333487",
+      "267692160.155951.155951",
+      "30766025.100936.100936",
+      "340479127.12649.12649"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 18,
+    "healthy_support": 0,
+    "support_ratio": 18.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_136",
+    "representative_conversations": [
+      "30766025.100936.100936",
+      "363633613.38207.38207",
+      "372297349.314.314",
+      "487168901.23422.23422",
+      "490016260.43626.43626"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 18,
+    "healthy_support": 0,
+    "support_ratio": 18.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_137",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "353086396.18088.18088",
+      "363633613.38207.38207",
+      "371804001.43122.43122"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 18,
+    "healthy_support": 0,
+    "support_ratio": 18.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_138",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849",
+      "371804001.43122.43122"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 17,
+    "healthy_support": 0,
+    "support_ratio": 17.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_139",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "31254071.3384.3384",
+      "363633613.38207.38207",
+      "371804001.43122.43122"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 17,
+    "healthy_support": 0,
+    "support_ratio": 17.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_140",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "235454922.171854.171854",
+      "30766025.100936.100936",
+      "31254071.3384.3384"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 17,
+    "healthy_support": 0,
+    "support_ratio": 17.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_141",
+    "representative_conversations": [
+      "31254071.3384.3384",
+      "405855727.22442.22442",
+      "487168901.23422.23422",
+      "490016260.43626.43626",
+      "493067775.23733.23733"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 16,
+    "healthy_support": 0,
+    "support_ratio": 16.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_142",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "267692160.155951.155951",
+      "30766025.100936.100936",
+      "363633613.38207.38207",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 16,
+    "healthy_support": 0,
+    "support_ratio": 16.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_143",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "371804001.43122.43122",
+      "490016260.43626.43626",
+      "493067775.23733.23733",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 15,
+    "healthy_support": 0,
+    "support_ratio": 15.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_144",
+    "representative_conversations": [
+      "136289256.2567.2567",
+      "172326135.17849.17849",
+      "371804001.43122.43122",
+      "372297349.314.314",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 15,
+    "healthy_support": 0,
+    "support_ratio": 15.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_145",
+    "representative_conversations": [
+      "363633613.38207.38207",
+      "489397642.53202.53202",
+      "508452035.869.869",
+      "509872505.673.673",
+      "539530522.36207.36207"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 15,
+    "healthy_support": 0,
+    "support_ratio": 15.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_146",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "30766025.100936.100936",
+      "340479127.12649.12649"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 14,
+    "healthy_support": 0,
+    "support_ratio": 14.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_147",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "30766025.100936.100936",
+      "31254071.3384.3384",
+      "353086396.18088.18088"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 14,
+    "healthy_support": 0,
+    "support_ratio": 14.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_148",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "371804001.43122.43122",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "501948150.18731.18731"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 13,
+    "healthy_support": 0,
+    "support_ratio": 13.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_149",
+    "representative_conversations": [
+      "136289256.2567.2567",
+      "229002613.333487.333487",
+      "340479127.12649.12649",
+      "487168901.23422.23422",
+      "489397642.53202.53202"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 13,
+    "healthy_support": 0,
+    "support_ratio": 13.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_150",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "31254071.3384.3384",
+      "363633613.38207.38207",
+      "371804001.43122.43122"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 13,
+    "healthy_support": 0,
+    "support_ratio": 13.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_151",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "31254071.3384.3384",
+      "353086396.18088.18088",
+      "401121481.35854.35854",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 0,
+    "support_ratio": 12.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_152",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "267692160.155951.155951",
+      "363633613.38207.38207",
+      "487168901.23422.23422",
+      "489397642.53202.53202"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 12,
+    "healthy_support": 0,
+    "support_ratio": 12.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_153",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "235454922.171854.171854",
+      "30766025.100936.100936",
+      "363633613.38207.38207",
+      "508452035.869.869"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 0,
+    "support_ratio": 12.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_154",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "267692160.155951.155951",
+      "30766025.100936.100936",
+      "363633613.38207.38207",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 0,
+    "support_ratio": 12.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_155",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849",
+      "267692160.155951.155951",
+      "363633613.38207.38207"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 0,
+    "support_ratio": 12.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_156",
+    "representative_conversations": [
+      "31254071.3384.3384",
+      "405855727.22442.22442",
+      "487168901.23422.23422",
+      "493067775.23733.23733",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE_POLICY",
+    "pattern_length": 4,
+    "derailed_support": 12,
+    "healthy_support": 1,
+    "support_ratio": 12.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_157",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "323735621.163644.163644",
+      "346030328.40481.40481",
+      "428456223.121403.121403",
+      "428667627.34242.34242"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 11,
+    "healthy_support": 0,
+    "support_ratio": 11.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_158",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849",
+      "372297349.314.314",
+      "489397642.53202.53202"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 11,
+    "healthy_support": 0,
+    "support_ratio": 11.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_159",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "371804001.43122.43122",
+      "372297349.314.314",
+      "487168901.23422.23422",
+      "489397642.53202.53202"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 11,
+    "healthy_support": 0,
+    "support_ratio": 11.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_160",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "31254071.3384.3384",
+      "353086396.18088.18088",
+      "401121481.35854.35854",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 3,
+    "derailed_support": 11,
+    "healthy_support": 0,
+    "support_ratio": 11.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_161",
+    "representative_conversations": [
+      "340479127.12649.12649",
+      "371804001.43122.43122",
+      "401121481.35854.35854",
+      "405855727.22442.22442",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> POSITIVE",
+    "pattern_length": 4,
+    "derailed_support": 20,
+    "healthy_support": 2,
+    "support_ratio": 10.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_162",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "275318819.86311.86311",
+      "322007841.46090.46090",
+      "346030328.40481.40481",
+      "372573469.127605.127605"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 10,
+    "healthy_support": 0,
+    "support_ratio": 10.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_163",
+    "representative_conversations": [
+      "229002613.333487.333487",
+      "363633613.38207.38207",
+      "371804001.43122.43122",
+      "487168901.23422.23422",
+      "489397642.53202.53202"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 10,
+    "healthy_support": 0,
+    "support_ratio": 10.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_164",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "401121481.35854.35854",
+      "487168901.23422.23422",
+      "489397642.53202.53202",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 10,
+    "healthy_support": 1,
+    "support_ratio": 10.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_165",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "353086396.18088.18088",
+      "368048281.168900.168900",
+      "460772716.211118.211118",
+      "493067775.23733.23733"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 10,
+    "healthy_support": 1,
+    "support_ratio": 10.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_166",
+    "representative_conversations": [
+      "341775060.107999.107999",
+      "35115061.7891.7650",
+      "368048281.168900.168900",
+      "428456223.121403.121403",
+      "446966206.37683.37683"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 4,
+    "derailed_support": 10,
+    "healthy_support": 1,
+    "support_ratio": 10.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_167",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "388723036.6709.6709",
+      "460772716.211118.211118",
+      "493067775.23733.23733",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_168",
+    "representative_conversations": [
+      "136289256.2567.2567",
+      "229002613.333487.333487",
+      "30766025.100936.100936",
+      "340479127.12649.12649",
+      "363633613.38207.38207"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_169",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "363633613.38207.38207",
+      "487168901.23422.23422",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_170",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "275318819.86311.86311",
+      "322007841.46090.46090",
+      "346030328.40481.40481",
+      "395907710.101057.101057"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_171",
+    "representative_conversations": [
+      "508452035.869.869",
+      "544444264.18773.18773",
+      "546557839.9783.9783",
+      "586320091.121449.121449",
+      "670364749.326.326"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_172",
+    "representative_conversations": [
+      "30766025.100936.100936",
+      "363633613.38207.38207",
+      "372297349.314.314",
+      "487168901.23422.23422",
+      "544444264.18773.18773"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_173",
+    "representative_conversations": [
+      "363633613.38207.38207",
+      "489397642.53202.53202",
+      "508452035.869.869",
+      "544444264.18773.18773",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE_POLICY",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_174",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "323735621.163644.163644",
+      "346030328.40481.40481",
+      "428456223.121403.121403",
+      "462206585.21475.21475"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 1,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_175",
+    "representative_conversations": [
+      "144400646.123809.123809",
+      "323735621.163644.163644",
+      "346030328.40481.40481",
+      "405855727.22442.22442",
+      "428456223.121403.121403"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_176",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "534205014.79854.79854",
+      "544444264.18773.18773"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_177",
+    "representative_conversations": [
+      "340479127.12649.12649",
+      "371804001.43122.43122",
+      "401121481.35854.35854",
+      "405855727.22442.22442",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 1,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_178",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "273630609.83017.83017",
+      "315287769.101858.101858",
+      "395907710.101057.101057",
+      "446966206.37683.37683"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEUTRAL -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_179",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "372573469.127605.127605",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "528270321.13069.13069"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_180",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "371804001.43122.43122",
+      "490016260.43626.43626",
+      "500673566.49978.49978",
+      "568374772.40211.40211"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_181",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "490016260.43626.43626",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> POSITIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 1,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_182",
+    "representative_conversations": [
+      "322007841.46090.46090",
+      "372573469.127605.127605",
+      "388723036.6709.6709",
+      "460772716.211118.211118",
+      "528270321.13069.13069"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 9,
+    "healthy_support": 0,
+    "support_ratio": 9.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_183",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "534205014.79854.79854",
+      "544444264.18773.18773"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 16,
+    "healthy_support": 2,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_184",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "275318819.86311.86311",
+      "322007841.46090.46090",
+      "346030328.40481.40481",
+      "372573469.127605.127605"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_185",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "30766025.100936.100936",
+      "353086396.18088.18088",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_186",
+    "representative_conversations": [
+      "487168901.23422.23422",
+      "500673566.49978.49978",
+      "544444264.18773.18773",
+      "546557839.9783.9783",
+      "670364749.326.326"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_187",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "500673566.49978.49978",
+      "501948150.18731.18731",
+      "544444264.18773.18773",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_188",
+    "representative_conversations": [
+      "363633613.38207.38207",
+      "546557839.9783.9783",
+      "670364749.326.326",
+      "688274527.24508.24508",
+      "730178616.16748.16748"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_189",
+    "representative_conversations": [
+      "363633613.38207.38207",
+      "509872505.673.673",
+      "544444264.18773.18773",
+      "546557839.9783.9783",
+      "670364749.326.326"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_190",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "163192049.4586.4586",
+      "172326135.17849.17849",
+      "372297349.314.314",
+      "489397642.53202.53202"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_191",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "371804001.43122.43122",
+      "401121481.35854.35854",
+      "487168901.23422.23422",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_192",
+    "representative_conversations": [
+      "115386656.79212.79212",
+      "15417559.14946.14946",
+      "401121481.35854.35854",
+      "487168901.23422.23422",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 1,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_193",
+    "representative_conversations": [
+      "151390001.150819.150819",
+      "192413701.64524.64524",
+      "487168901.23422.23422",
+      "500673566.49978.49978",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_194",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "546557839.9783.9783",
+      "586320091.121449.121449"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 1,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_195",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "460772716.211118.211118",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "546319590.22639.22639"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_196",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "501948150.18731.18731",
+      "586320091.121449.121449"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_197",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "229002613.333487.333487",
+      "235454922.171854.171854",
+      "30766025.100936.100936",
+      "353086396.18088.18088"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_198",
+    "representative_conversations": [
+      "229002613.333487.333487",
+      "31254071.3384.3384",
+      "371804001.43122.43122",
+      "495435334.22332.22326",
+      "568374772.40211.40211"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_199",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "372573469.127605.127605",
+      "388723036.6709.6709",
+      "395907710.101057.101057"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 8,
+    "healthy_support": 0,
+    "support_ratio": 8.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_200",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "493067775.23733.23733",
+      "500673566.49978.49978",
+      "501948150.18731.18731",
+      "586320091.121449.121449"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 4,
+    "derailed_support": 15,
+    "healthy_support": 2,
+    "support_ratio": 7.5,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_201",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "357881093.120145.120145",
+      "368048281.168900.168900",
+      "388723036.6709.6709"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 15,
+    "healthy_support": 2,
+    "support_ratio": 7.5,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_202",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "315287769.101858.101858",
+      "346030328.40481.40481",
+      "372573469.127605.127605",
+      "388723036.6709.6709"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_203",
+    "representative_conversations": [
+      "136289256.2567.2567",
+      "172326135.17849.17849",
+      "489397642.53202.53202",
+      "585061428.38941.38941",
+      "676798046.15098.15098"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_204",
+    "representative_conversations": [
+      "30766025.100936.100936",
+      "487168901.23422.23422",
+      "544444264.18773.18773",
+      "546557839.9783.9783",
+      "657577294.6809.6809"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_205",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "267692160.155951.155951",
+      "487168901.23422.23422",
+      "546557839.9783.9783",
+      "657577294.6809.6809"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_206",
+    "representative_conversations": [
+      "363633613.38207.38207",
+      "489397642.53202.53202",
+      "544444264.18773.18773",
+      "546557839.9783.9783",
+      "688274527.24508.24508"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_207",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "487168901.23422.23422",
+      "489397642.53202.53202",
+      "500673566.49978.49978",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_208",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "315287769.101858.101858",
+      "346030328.40481.40481",
+      "395907710.101057.101057",
+      "460772716.211118.211118"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 1,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_209",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "353086396.18088.18088",
+      "37920764.84117.84117",
+      "395907710.101057.101057"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_210",
+    "representative_conversations": [
+      "372297349.314.314",
+      "487168901.23422.23422",
+      "546557839.9783.9783",
+      "657577294.6809.6809",
+      "670364749.326.326"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_211",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "500673566.49978.49978",
+      "501948150.18731.18731",
+      "544444264.18773.18773",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_212",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "371804001.43122.43122",
+      "500673566.49978.49978",
+      "568374772.40211.40211",
+      "683540507.33233.33233"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 1,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_213",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "315287769.101858.101858",
+      "372573469.127605.127605",
+      "388723036.6709.6709",
+      "395907710.101057.101057"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEUTRAL -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 1,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_214",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "372573469.127605.127605",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "546319590.22639.22639"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 1,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_215",
+    "representative_conversations": [
+      "368048281.168900.168900",
+      "428456223.121403.121403",
+      "490016260.43626.43626",
+      "546319590.22639.22639",
+      "627097566.118.118"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_216",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "315287769.101858.101858",
+      "446966206.37683.37683",
+      "500673566.49978.49978",
+      "546319590.22639.22639"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEUTRAL -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_217",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "460772716.211118.211118"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 7,
+    "healthy_support": 1,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_218",
+    "representative_conversations": [
+      "144400646.123809.123809",
+      "151390001.150819.150819",
+      "428667627.34242.34242",
+      "462206585.21475.21475",
+      "539530522.36207.36207"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 7,
+    "healthy_support": 0,
+    "support_ratio": 7.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_219",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "401121481.35854.35854",
+      "495435334.22332.22326",
+      "534205014.79854.79854",
+      "539530522.36207.36207"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 2,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_220",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "372573469.127605.127605",
+      "446966206.37683.37683",
+      "460772716.211118.211118"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 2,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_221",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "35115061.7891.7650",
+      "391197429.22905.22905",
+      "395907710.101057.101057",
+      "446966206.37683.37683"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE_POLICY",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 1,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_222",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "323735621.163644.163644",
+      "346030328.40481.40481",
+      "428667627.34242.34242",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_223",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "353086396.18088.18088",
+      "401121481.35854.35854",
+      "487168901.23422.23422",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_224",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "395907710.101057.101057",
+      "460772716.211118.211118",
+      "546557839.9783.9783"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_225",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "172326135.17849.17849",
+      "372297349.314.314",
+      "490016260.43626.43626",
+      "75067662.84381.84381"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_226",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "235454922.171854.171854",
+      "363633613.38207.38207",
+      "670364749.326.326",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_227",
+    "representative_conversations": [
+      "30766025.100936.100936",
+      "363633613.38207.38207",
+      "670364749.326.326",
+      "67840709.0.0",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_228",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "30766025.100936.100936",
+      "363633613.38207.38207",
+      "508452035.869.869",
+      "681047436.363.363"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_229",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "401121481.35854.35854",
+      "495435334.22332.22326",
+      "534205014.79854.79854",
+      "568374772.40211.40211"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_230",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "31254071.3384.3384",
+      "487168901.23422.23422",
+      "508452035.869.869",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_231",
+    "representative_conversations": [
+      "340479127.12649.12649",
+      "371804001.43122.43122",
+      "487168901.23422.23422",
+      "490016260.43626.43626",
+      "495435334.22332.22326"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 0,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_232",
+    "representative_conversations": [
+      "215630746.123524.123524",
+      "353086396.18088.18088",
+      "508452035.869.869",
+      "674557453.15271.15271",
+      "799071176.22800.22800"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_POLICY",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 1,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_233",
+    "representative_conversations": [
+      "323735621.163644.163644",
+      "428456223.121403.121403",
+      "462206585.21475.21475",
+      "490016260.43626.43626",
+      "546319590.22639.22639"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 1,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_234",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "460772716.211118.211118",
+      "493067775.23733.23733"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> POSITIVE -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 1,
+    "support_ratio": 6.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_235",
+    "representative_conversations": [
+      "275318819.86311.86311",
+      "372573469.127605.127605",
+      "400155308.20046.20046",
+      "528270321.13069.13069",
+      "649333991.538.517"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 11,
+    "healthy_support": 2,
+    "support_ratio": 5.5,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_236",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "357881093.120145.120145",
+      "368048281.168900.168900",
+      "428456223.121403.121403"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY",
+    "pattern_length": 4,
+    "derailed_support": 10,
+    "healthy_support": 2,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_237",
+    "representative_conversations": [
+      "144400646.123809.123809",
+      "323735621.163644.163644",
+      "346030328.40481.40481",
+      "405855727.22442.22442",
+      "428456223.121403.121403"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEUTRAL",
+    "pattern_length": 4,
+    "derailed_support": 10,
+    "healthy_support": 2,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_238",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "353086396.18088.18088",
+      "368048281.168900.168900",
+      "460772716.211118.211118",
+      "493067775.23733.23733"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEUTRAL -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_239",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "487168901.23422.23422",
+      "546557839.9783.9783",
+      "651954455.41638.41638",
+      "676798046.15098.15098"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> POSITIVE -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_240",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "500673566.49978.49978",
+      "568374772.40211.40211",
+      "807589476.66247.66247",
+      "93468663.16231.16231"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_241",
+    "representative_conversations": [
+      "275318819.86311.86311",
+      "460772716.211118.211118",
+      "500673566.49978.49978",
+      "544444264.18773.18773",
+      "662128429.105687.105687"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_242",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "460772716.211118.211118",
+      "500673566.49978.49978",
+      "662128429.105687.105687",
+      "93468663.16231.16231"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_243",
+    "representative_conversations": [
+      "363633613.38207.38207",
+      "585061428.38941.38941",
+      "730178616.16748.16748",
+      "75067662.84381.84381",
+      "87330700.32278.32278"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_244",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "489397642.53202.53202",
+      "586320091.121449.121449",
+      "75067662.84381.84381",
+      "78575567.85056.85056"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_TOXIC",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_TOXIC -> POSITIVE",
+    "pattern_length": 3,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_245",
+    "representative_conversations": [
+      "13533876.64395.64395",
+      "247472127.253579.253579",
+      "337579124.3379.3379",
+      "386464525.11029.11029",
+      "639350961.114798.114798"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_246",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "546557839.9783.9783",
+      "662128429.105687.105687"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_247",
+    "representative_conversations": [
+      "315287769.101858.101858",
+      "346030328.40481.40481",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "734025151.31540.31527"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_248",
+    "representative_conversations": [
+      "235454922.171854.171854",
+      "30766025.100936.100936",
+      "508452035.869.869",
+      "670364749.326.326",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_249",
+    "representative_conversations": [
+      "363633613.38207.38207",
+      "508452035.869.869",
+      "670364749.326.326",
+      "747897051.86355.86355",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_250",
+    "representative_conversations": [
+      "322007841.46090.46090",
+      "346030328.40481.40481",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "662128429.105687.105687"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_251",
+    "representative_conversations": [
+      "163192049.4586.4586",
+      "487168901.23422.23422",
+      "546557839.9783.9783",
+      "688274527.24508.24508",
+      "75067662.84381.84381"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEUTRAL -> NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_252",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "489397642.53202.53202",
+      "586320091.121449.121449",
+      "750457378.45288.45288",
+      "75067662.84381.84381"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_253",
+    "representative_conversations": [
+      "340479127.12649.12649",
+      "371804001.43122.43122",
+      "487168901.23422.23422",
+      "495435334.22332.22326",
+      "568374772.40211.40211"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_254",
+    "representative_conversations": [
+      "31254071.3384.3384",
+      "487168901.23422.23422",
+      "670364749.326.326",
+      "747897051.86355.86355",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_255",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "371804001.43122.43122",
+      "495435334.22332.22326",
+      "615438945.52551.52551",
+      "649333991.538.517"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_256",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "500673566.49978.49978",
+      "568374772.40211.40211",
+      "683540507.33233.33233",
+      "93468663.16231.16231"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_257",
+    "representative_conversations": [
+      "31254071.3384.3384",
+      "490016260.43626.43626",
+      "500673566.49978.49978",
+      "508452035.869.869",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> NEGATIVE -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_258",
+    "representative_conversations": [
+      "493067775.23733.23733",
+      "586320091.121449.121449",
+      "730178616.16748.16748",
+      "747897051.86355.86355",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> POSITIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_259",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "357881093.120145.120145",
+      "368048281.168900.168900",
+      "428456223.121403.121403",
+      "662128429.105687.105687"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_260",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "428456223.121403.121403",
+      "527661344.134882.134848",
+      "64328022.65166.65166",
+      "748804994.464.467"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE_TOXIC",
+    "pattern_length": 4,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_261",
+    "representative_conversations": [
+      "405855727.22442.22442",
+      "487168901.23422.23422",
+      "490016260.43626.43626",
+      "539530522.36207.36207",
+      "586320091.121449.121449"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE_TOXIC"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> NEUTRAL -> NEGATIVE_TOXIC",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_262",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "493067775.23733.23733",
+      "586320091.121449.121449",
+      "803512651.147455.147455",
+      "830188775.8261.8261"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEUTRAL -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_263",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "388723036.6709.6709",
+      "460772716.211118.211118",
+      "546319590.22639.22639",
+      "620495641.44285.44285"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEGATIVE_POLICY",
+    "pattern_length": 4,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_264",
+    "representative_conversations": [
+      "346030328.40481.40481",
+      "462206585.21475.21475",
+      "546319590.22639.22639",
+      "606039667.169988.169988",
+      "615438945.52551.52551"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_265",
+    "representative_conversations": [
+      "144400646.123809.123809",
+      "151390001.150819.150819",
+      "462206585.21475.21475",
+      "539530522.36207.36207",
+      "615438945.52551.52551"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE_POLICY",
+    "pattern_length": 4,
+    "derailed_support": 5,
+    "healthy_support": 1,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_266",
+    "representative_conversations": [
+      "428667627.34242.34242",
+      "462206585.21475.21475",
+      "615438945.52551.52551",
+      "649333991.538.517",
+      "832756878.1266.1266"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 5,
+    "healthy_support": 0,
+    "support_ratio": 5.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_267",
+    "representative_conversations": [
+      "315287769.101858.101858",
+      "462206585.21475.21475",
+      "534205014.79854.79854",
+      "568374772.40211.40211",
+      "615438945.52551.52551"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 9,
+    "healthy_support": 2,
+    "support_ratio": 4.5,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_268",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "35115061.7891.7650",
+      "372573469.127605.127605",
+      "446966206.37683.37683",
+      "527661344.134882.134848"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 3,
+    "support_ratio": 4.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_269",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "163003106.19300.19300",
+      "31254071.3384.3384",
+      "315287769.101858.101858",
+      "372573469.127605.127605"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> POSITIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 12,
+    "healthy_support": 3,
+    "support_ratio": 4.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_270",
+    "representative_conversations": [
+      "323735621.163644.163644",
+      "353086396.18088.18088",
+      "368048281.168900.168900",
+      "372573469.127605.127605",
+      "37920764.84117.84117"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_POLICY",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 2,
+    "support_ratio": 4.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_271",
+    "representative_conversations": [
+      "15417559.14946.14946",
+      "172326135.17849.17849",
+      "346030328.40481.40481",
+      "372297349.314.314",
+      "449175770.77792.77792"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEGATIVE_POLICY",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 2,
+    "support_ratio": 4.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_272",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "323735621.163644.163644",
+      "428456223.121403.121403",
+      "462206585.21475.21475",
+      "487168901.23422.23422"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> POSITIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 2,
+    "support_ratio": 4.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_273",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "315287769.101858.101858",
+      "368048281.168900.168900",
+      "428456223.121403.121403",
+      "627097566.118.118"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "POSITIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> POSITIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 2,
+    "support_ratio": 4.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_274",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "368048281.168900.168900",
+      "37920764.84117.84117",
+      "428456223.121403.121403",
+      "446966206.37683.37683"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> POSITIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 8,
+    "healthy_support": 2,
+    "support_ratio": 4.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_275",
+    "representative_conversations": [
+      "353086396.18088.18088",
+      "372573469.127605.127605",
+      "388723036.6709.6709",
+      "446966206.37683.37683",
+      "460772716.211118.211118"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> POSITIVE",
+    "pattern_length": 4,
+    "derailed_support": 15,
+    "healthy_support": 4,
+    "support_ratio": 3.75,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_276",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "353086396.18088.18088",
+      "372573469.127605.127605",
+      "37920764.84117.84117"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY -> POSITIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 11,
+    "healthy_support": 3,
+    "support_ratio": 3.67,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_277",
+    "representative_conversations": [
+      "235454922.171854.171854",
+      "315287769.101858.101858",
+      "388723036.6709.6709",
+      "428667627.34242.34242",
+      "60639992.46582.46582"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 11,
+    "healthy_support": 3,
+    "support_ratio": 3.67,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_278",
+    "representative_conversations": [
+      "144400646.123809.123809",
+      "151390001.150819.150819",
+      "269894650.1070.1070",
+      "346030328.40481.40481",
+      "363633613.38207.38207"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 11,
+    "healthy_support": 3,
+    "support_ratio": 3.67,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_279",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "323735621.163644.163644",
+      "368048281.168900.168900",
+      "372573469.127605.127605",
+      "428456223.121403.121403"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 11,
+    "healthy_support": 3,
+    "support_ratio": 3.67,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_280",
+    "representative_conversations": [
+      "388723036.6709.6709",
+      "400155308.20046.20046",
+      "460772716.211118.211118",
+      "462206585.21475.21475",
+      "493067775.23733.23733"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEGATIVE",
+      "NEUTRAL"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEGATIVE -> NEGATIVE -> NEUTRAL",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 2,
+    "support_ratio": 3.5,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_281",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "368048281.168900.168900",
+      "388723036.6709.6709",
+      "395907710.101057.101057",
+      "428456223.121403.121403"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> NEUTRAL -> POSITIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 7,
+    "healthy_support": 2,
+    "support_ratio": 3.5,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_282",
+    "representative_conversations": [
+      "371804001.43122.43122",
+      "372573469.127605.127605",
+      "446966206.37683.37683",
+      "528270321.13069.13069",
+      "627097566.118.118"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 27,
+    "healthy_support": 8,
+    "support_ratio": 3.38,
+    "ratio_reliable": true,
+    "pattern_id": "PAT_283",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "163003106.19300.19300",
+      "229002613.333487.333487",
+      "273630609.83017.83017",
+      "302538703.13243.13243"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 30,
+    "healthy_support": 9,
+    "support_ratio": 3.33,
+    "ratio_reliable": true,
+    "pattern_id": "PAT_284",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "163003106.19300.19300",
+      "31254071.3384.3384",
+      "315287769.101858.101858",
+      "323735621.163644.163644"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEUTRAL -> NEUTRAL -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 10,
+    "healthy_support": 3,
+    "support_ratio": 3.33,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_285",
+    "representative_conversations": [
+      "400155308.20046.20046",
+      "460772716.211118.211118",
+      "462206585.21475.21475",
+      "493067775.23733.23733",
+      "500673566.49978.49978"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 56,
+    "healthy_support": 17,
+    "support_ratio": 3.29,
+    "ratio_reliable": true,
+    "pattern_id": "PAT_286",
+    "representative_conversations": [
+      "108309135.0.0",
+      "118650722.2216.2216",
+      "142094859.137307.137307",
+      "181655527.1162.1162",
+      "184209031.199517.199517"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEUTRAL",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEUTRAL -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 13,
+    "healthy_support": 4,
+    "support_ratio": 3.25,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_287",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "346030328.40481.40481",
+      "353086396.18088.18088",
+      "372573469.127605.127605",
+      "37920764.84117.84117"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "POSITIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> POSITIVE -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 19,
+    "healthy_support": 6,
+    "support_ratio": 3.17,
+    "ratio_reliable": true,
+    "pattern_id": "PAT_288",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "163003106.19300.19300",
+      "192413701.64524.64524",
+      "269894650.1070.1070",
+      "275318819.86311.86311"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 22,
+    "healthy_support": 7,
+    "support_ratio": 3.14,
+    "ratio_reliable": true,
+    "pattern_id": "PAT_289",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "163003106.19300.19300",
+      "31254071.3384.3384",
+      "323735621.163644.163644",
+      "35115061.7891.7650"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 33,
+    "healthy_support": 11,
+    "support_ratio": 3.0,
+    "ratio_reliable": true,
+    "pattern_id": "PAT_290",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "163003106.19300.19300",
+      "229002613.333487.333487",
+      "273630609.83017.83017",
+      "302538703.13243.13243"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> POSITIVE -> POSITIVE -> NEGATIVE -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 15,
+    "healthy_support": 5,
+    "support_ratio": 3.0,
+    "ratio_reliable": true,
+    "pattern_id": "PAT_291",
+    "representative_conversations": [
+      "150842296.10681.9553",
+      "163003106.19300.19300",
+      "302538703.13243.13243",
+      "372573469.127605.127605",
+      "391197429.22905.22905"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "NEGATIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> NEGATIVE -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 12,
+    "healthy_support": 4,
+    "support_ratio": 3.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_292",
+    "representative_conversations": [
+      "275318819.86311.86311",
+      "388723036.6709.6709",
+      "446966206.37683.37683",
+      "460772716.211118.211118",
+      "462206585.21475.21475"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE",
+    "pattern_length": 4,
+    "derailed_support": 9,
+    "healthy_support": 3,
+    "support_ratio": 3.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_293",
+    "representative_conversations": [
+      "144400646.123809.123809",
+      "150842296.10681.9553",
+      "151390001.150819.150819",
+      "428667627.34242.34242",
+      "462206585.21475.21475"
+    ]
+  },
+  {
+    "pattern": [
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE",
+      "NEUTRAL",
+      "NEGATIVE_POLICY"
+    ],
+    "pattern_str": "POSITIVE -> POSITIVE -> NEGATIVE -> NEUTRAL -> NEGATIVE_POLICY",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 2,
+    "support_ratio": 3.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_294",
+    "representative_conversations": [
+      "172326135.17849.17849",
+      "322708569.51191.51191",
+      "489397642.53202.53202",
+      "501114472.15801.15801",
+      "754730462.12121.12121"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_TOXIC",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_TOXIC -> POSITIVE",
+    "pattern_length": 2,
+    "derailed_support": 6,
+    "healthy_support": 2,
+    "support_ratio": 3.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_295",
+    "representative_conversations": [
+      "120995731.84245.84245",
+      "13533876.64395.64395",
+      "247472127.253579.253579",
+      "337579124.3379.3379",
+      "386464525.11029.11029"
+    ]
+  },
+  {
+    "pattern": [
+      "NEUTRAL",
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "NEGATIVE_POLICY",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEUTRAL -> NEGATIVE_POLICY -> NEGATIVE -> NEGATIVE_POLICY -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 2,
+    "support_ratio": 3.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_296",
+    "representative_conversations": [
+      "144400646.123809.123809",
+      "150842296.10681.9553",
+      "151390001.150819.150819",
+      "462206585.21475.21475",
+      "586320091.121449.121449"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEGATIVE",
+      "POSITIVE",
+      "NEUTRAL",
+      "POSITIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEGATIVE -> POSITIVE -> NEUTRAL -> POSITIVE",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 2,
+    "support_ratio": 3.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_297",
+    "representative_conversations": [
+      "163003106.19300.19300",
+      "37920764.84117.84117",
+      "446966206.37683.37683",
+      "546319590.22639.22639",
+      "696603755.301828.301828"
+    ]
+  },
+  {
+    "pattern": [
+      "NEGATIVE_POLICY",
+      "NEUTRAL",
+      "POSITIVE",
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "pattern_str": "NEGATIVE_POLICY -> NEUTRAL -> POSITIVE -> POSITIVE -> NEGATIVE",
+    "pattern_length": 5,
+    "derailed_support": 6,
+    "healthy_support": 2,
+    "support_ratio": 3.0,
+    "ratio_reliable": false,
+    "pattern_id": "PAT_298",
+    "representative_conversations": [
+      "372573469.127605.127605",
+      "400155308.20046.20046",
+      "446966206.37683.37683",
+      "615438945.52551.52551",
+      "649333991.538.517"
+    ]
+  }
+]
