@@ -54,6 +54,8 @@ MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO = 5  # patterns below this show as "weak e
 
 @st.cache_resource
 def load_all():
+    import nltk
+    nltk.download('vader_lexicon', quiet=True)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR)
