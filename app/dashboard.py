@@ -819,6 +819,7 @@ with tab4:
                 model_name
                 for model_name in [
                     "TF-IDF text baseline",
+                    "Word + character TF-IDF",
                     "State-frequency ablation (orderless)",
                     "Ordered-state n-gram model",
                     "Hybrid text + state sequence",
