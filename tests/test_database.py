@@ -1,6 +1,6 @@
 import unittest
 
-from app.database import connect_database, seed_reference_data
+from app.database import connect_cache, connect_database, seed_reference_data
 
 
 class DatabaseLayerTests(unittest.TestCase):
@@ -10,6 +10,14 @@ class DatabaseLayerTests(unittest.TestCase):
     def test_without_uri_is_explicit_demo_mode(self):
         self.assertIn("mongomock", self.mode.lower())
         self.assertIn("not persistent", self.mode.lower())
+
+    def test_demo_cache_supports_get_set_and_counters(self):
+        cache, mode = connect_cache()
+        self.assertIn("fakeredis", mode.lower())
+        cache.setex("test-key", 60, "0.25")
+        self.assertEqual(cache.get("test-key"), "0.25")
+        cache.incr("test-counter")
+        self.assertEqual(int(cache.get("test-counter")), 1)
 
     def test_seeding_is_idempotent_and_preserves_moderator_notes(self):
         patterns = [
