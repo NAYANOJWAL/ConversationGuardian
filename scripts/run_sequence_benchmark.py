@@ -19,6 +19,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from sklearn.compose import ColumnTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
@@ -261,6 +262,50 @@ def _make_sequence_model():
     )
 
 
+def _make_hybrid_model():
+    """Combine prefix message text with ordered state n-grams."""
+    features = ColumnTransformer(
+        transformers=[
+            (
+                "text",
+                TfidfVectorizer(
+                    lowercase=True,
+                    strip_accents="unicode",
+                    ngram_range=(1, 2),
+                    min_df=2,
+                    max_features=60000,
+                    sublinear_tf=True,
+                ),
+                "text",
+            ),
+            (
+                "states",
+                TfidfVectorizer(
+                    tokenizer=str.split,
+                    preprocessor=None,
+                    token_pattern=None,
+                    lowercase=False,
+                    ngram_range=(1, 3),
+                    min_df=1,
+                    max_features=20000,
+                    sublinear_tf=True,
+                ),
+                "states",
+            ),
+        ],
+        transformer_weights={"text": 1.0, "states": 1.0},
+    )
+    return make_pipeline(
+        features,
+        LogisticRegression(
+            class_weight="balanced",
+            max_iter=1500,
+            random_state=SEED,
+            solver="liblinear",
+        ),
+    )
+
+
 def _positive_probability(model, values: list[str]) -> np.ndarray:
     probabilities = model.predict_proba(values)
     classes = list(model[-1].classes_)
@@ -403,6 +448,27 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
         )
         predictions[f"sequence_{int(fraction * 100)}pct_probability"] = sequence_probability
 
+        # Hybrid model: test whether sequence-state features add value to text.
+        train_hybrid = pd.DataFrame({"text": train_text, "states": train_states})
+        test_hybrid = pd.DataFrame({"text": test_text, "states": test_states})
+        hybrid_model = _make_hybrid_model()
+        hybrid_model.fit(train_hybrid, y_train)
+        hybrid_probability = _positive_probability(hybrid_model, test_hybrid)
+        metrics, extra = evaluate_predictions(y_test, hybrid_probability)
+        results.append(
+            {
+                "model": "Hybrid text + state sequence",
+                "prefix_fraction": fraction,
+                "prefix_label": prefix_label,
+                "n_train": len(train),
+                "n_test": len(test),
+                **metrics,
+                "macro_f1_bootstrap_95ci": _bootstrap_macro_f1(y_test, hybrid_probability),
+                **extra,
+            }
+        )
+        predictions[f"hybrid_{int(fraction * 100)}pct_probability"] = hybrid_probability
+
     train_ids = sorted(train["conversation_id"].astype(str).tolist())
     test_ids = sorted(test["conversation_id"].astype(str).tolist())
     overlap_count = len(set(train_ids).intersection(test_ids))
@@ -446,6 +512,7 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
             "TF-IDF text baseline": "Word unigram/bigram TF-IDF + balanced logistic regression on prefix text.",
             "State-frequency ablation (orderless)": "State-token unigram TF-IDF + balanced logistic regression; ignores transition order.",
             "Ordered-state n-gram model": "State-token 1-3-gram TF-IDF + balanced logistic regression; retains local event order.",
+            "Hybrid text + state sequence": "Concatenated text word 1-2-gram TF-IDF and state-token 1-3-gram TF-IDF + balanced logistic regression.",
         },
         "metrics": results,
     }
