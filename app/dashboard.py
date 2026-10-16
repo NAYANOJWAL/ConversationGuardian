@@ -629,6 +629,41 @@ with tab3:
     else:
         st.caption("Enter a speaker name to search the embedded utterances array.")
 
+    if st.button(
+        "Explain speaker query plan",
+        disabled=not bool(query_speaker.strip()),
+        help="Shows index/execution statistics when connected to a real MongoDB server.",
+    ):
+        if "mongomock" in database_mode:
+            st.info(
+                "Server-side explain statistics require real MongoDB. "
+                "Connect with MONGODB_URI to demonstrate the winning plan and index usage."
+            )
+        else:
+            try:
+                explain_result = db.command(
+                    "explain",
+                    {
+                        "find": "conversations",
+                        "filter": {"utterances.speaker": query_speaker.strip()},
+                        "limit": int(result_limit),
+                    },
+                    verbosity="executionStats",
+                )
+                execution_stats = explain_result.get("executionStats", {})
+                e1, e2, e3 = st.columns(3)
+                e1.metric("Documents examined", f"{execution_stats.get('totalDocsExamined', 0):,}")
+                e2.metric("Index keys examined", f"{execution_stats.get('totalKeysExamined', 0):,}")
+                e3.metric("Returned", f"{execution_stats.get('nReturned', 0):,}")
+                with st.expander("Winning query plan"):
+                    st.json(explain_result.get("queryPlanner", {}).get("winningPlan", {}))
+            except Exception as exc:
+                logger.exception("MongoDB explain failed")
+                st.warning(
+                    f"MongoDB explain is unavailable ({type(exc).__name__}); "
+                    "verify server version and permissions."
+                )
+
     st.markdown("---")
     st.markdown("### 2. Moderator notes — Create, Read, Update, Delete")
     st.caption(
