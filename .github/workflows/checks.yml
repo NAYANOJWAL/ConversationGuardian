@@ -1,0 +1,38 @@
+name: Lightweight checks
+
+on:
+  push:
+    branches:
+      - main
+      - upgrade/**
+  pull_request:
+
+# Keep only the newest check run for each branch/PR ref when several files are edited.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  database-and-sequence-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test and benchmark dependencies
+        run: python -m pip install --upgrade pip pymongo mongomock redis fakeredis pandas numpy pyarrow scikit-learn
+      - name: Check Python syntax
+        run: python -m compileall -q app scripts tests
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Run reproducible sequential benchmark
+        run: python scripts/run_sequence_benchmark.py --output reports/generated
+      - name: Upload benchmark outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: conversationguardian-sequence-benchmark
+          path: reports/generated/
+          if-no-files-found: error

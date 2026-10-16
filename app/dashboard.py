@@ -1,39 +1,59 @@
-import re
-import json
+import hashlib
 import html
-import time
-import torch
-import pandas as pd
-import numpy as np
+import json
+import logging
+import os
+import re
+from datetime import datetime, timezone
 from pathlib import Path
+
+import numpy as np
+import pandas as pd
 import streamlit as st
-
-import pymongo
-import mongomock
-import fakeredis
-
-import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import torch
+from dotenv import load_dotenv
 from detoxify import Detoxify
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+logger = logging.getLogger(__name__)
+
+try:
+    from app.database import connect_cache, connect_database, seed_reference_data
+except ModuleNotFoundError:
+    # Supports launching Streamlit from inside the app/ directory.
+    from database import connect_cache, connect_database, seed_reference_data
 
 # 1. Page Config & Custom CSS Styling
 st.set_page_config(page_title="ConversationGuardian - Moderator Command Center", layout="wide")
 
 st.markdown("""
 <style>
-    .chat-card-toxic { background-color: #321c1c; border-left: 5px solid #e53e3e; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #fff5f5; }
-    .chat-card-policy { background-color: #322d1c; border-left: 5px solid #d69e2e; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #fffaf0; }
-    .chat-card-civil { background-color: #1c3226; border-left: 5px solid #38a169; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #f0fff4; }
-    .chat-card-neu { background-color: #1a202c; border-left: 5px solid #a0aec0; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #ffffff; }
-    .meta-tag { font-size: 0.8rem; opacity: 0.85; margin-top: 4px; }
+    :root { --cg-ink: #e6edf7; --cg-muted: #9aa9bd; --cg-border: rgba(148,163,184,.22); }
+    .block-container { max-width: 1450px; padding-top: 2rem; padding-bottom: 3rem; }
+    [data-testid="stAppViewContainer"] { background: radial-gradient(ellipse at top left, rgba(42,76,122,.24), transparent 42%), #0b1120; }
+    [data-testid="stHeader"] { background: transparent; }
+    h1, h2, h3 { letter-spacing: -.025em; }
+    .cg-eyebrow { text-transform: uppercase; letter-spacing: .15em; font-size: .72rem; font-weight: 700; color: #7dd3fc; margin-bottom: .35rem; }
+    .cg-subtitle { color: #aebbd0; font-size: 1rem; line-height: 1.6; max-width: 850px; margin-bottom: 1rem; }
+    .cg-panel { border: 1px solid var(--cg-border); border-radius: 16px; padding: 1rem 1.15rem; background: rgba(18,28,47,.72); margin: .35rem 0 1rem; }
+    .cg-panel-title { font-weight: 700; font-size: 1rem; margin-bottom: .25rem; }
+    .cg-panel-caption { color: #aebbd0; font-size: .86rem; line-height: 1.5; }
+    .chat-card-toxic { background-color: #321c1c; border-left: 5px solid #ef4444; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #fff5f5; overflow-wrap: anywhere; }
+    .chat-card-policy { background-color: #322d1c; border-left: 5px solid #fbbf24; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #fffaf0; overflow-wrap: anywhere; }
+    .chat-card-civil { background-color: #17352c; border-left: 5px solid #34d399; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #f0fff4; overflow-wrap: anywhere; }
+    .chat-card-neu { background-color: #182337; border-left: 5px solid #94a3b8; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #f8fafc; overflow-wrap: anywhere; }
+    .meta-tag { font-size: .8rem; opacity: .9; margin-top: 7px; color: #d1d9e6; }
+    div[data-testid="stMetric"] { background: rgba(21,34,56,.72); border: 1px solid var(--cg-border); border-radius: 13px; padding: 12px 14px; }
+    div[data-testid="stTabs"] button { font-weight: 650; }
+    div[data-testid="stForm"] { border-color: var(--cg-border); }
+    .stButton > button[kind="primary"] { border-radius: 10px; font-weight: 700; }
 </style>
 """, unsafe_allow_html=True)
 
 # 2. Paths
 PROJECT_DIR = Path(__file__).parent.parent.resolve()
-if not (PROJECT_DIR / "models").exists():
-    PROJECT_DIR = Path(__file__).parent.parent.resolve()
+load_dotenv(PROJECT_DIR / ".env", override=False)
 
 DATA_DIR = PROJECT_DIR / "data"
 CLEANED_DIR = DATA_DIR / "cleaned"
@@ -52,64 +72,124 @@ HIGH_RISK_THRESHOLD = 0.65
 MODERATE_RISK_THRESHOLD = 0.45
 MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO = 5  # patterns below this show as "weak evidence", not a headline multiplier
 
-@st.cache_resource
+def _setting_from_config(name: str) -> str | None:
+    """Read connection settings from environment variables or Streamlit secrets."""
+    value = os.getenv(name, "").strip()
+    if not value:
+        try:
+            value = str(st.secrets.get(name, "")).strip()
+        except Exception:
+            value = ""
+    return value or None
+
+
+@st.cache_resource(show_spinner="Loading ConversationGuardian models and data...")
 def load_all():
     import nltk
-    nltk.download('vader_lexicon', quiet=True)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    try:
+        nltk.download("vader_lexicon", quiet=True)
+    except Exception:
+        pass
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR)
     model = AutoModelForSequenceClassification.from_pretrained(MODEL_DIR).to(device)
     model.eval()
 
     vader = SentimentIntensityAnalyzer()
-    detoxify_model = Detoxify('original', device=device.type)
+    detoxify_model = Detoxify("original", device=device.type)
 
-    with open(PATTERNS_DIR / "mined_patterns.json", "r", encoding="utf-8") as f:
-        mined_patterns = json.load(f)
-
-    mongo_client = mongomock.MongoClient()
-    db = mongo_client["ConversationGuardian"]
-
-    db["mined_patterns"].drop()
-    db["mined_patterns"].insert_many([{**p, "_id": str(p["pattern_id"])} for p in mined_patterns])
+    with open(PATTERNS_DIR / "mined_patterns.json", "r", encoding="utf-8") as file:
+        mined_patterns = json.load(file)
 
     train_cleaned = pd.read_parquet(CLEANED_DIR / "train_cleaned.parquet")
     train_feats = pd.read_parquet(FEATURES_DIR / "train_features.parquet")
     train_seqs = pd.read_parquet(SEQUENCES_DIR / "train_sequences.parquet")
-    seq_map = train_seqs.set_index('conversation_id')['symbol_sequence'].to_dict()
+
+    # Normalize identifier dtypes before joins/lookups; Parquet readers can infer
+    # integer/object/string IDs differently across environments.
+    for frame in (train_cleaned, train_feats, train_seqs):
+        if "conversation_id" not in frame.columns:
+            raise ValueError("Each prepared dataset must contain conversation_id.")
+        frame["conversation_id"] = frame["conversation_id"].astype(str)
+
+    seq_map = train_seqs.set_index("conversation_id")["symbol_sequence"].to_dict()
 
     merged = pd.merge(
         train_cleaned,
-        train_feats[['conversation_id', 'utterance_index', 'sentiment_compound', 'toxicity']],
-        on=['conversation_id', 'utterance_index'],
-        how='inner'
-    ).sort_values(['conversation_id', 'utterance_index'])
+        train_feats[
+            ["conversation_id", "utterance_index", "sentiment_compound", "toxicity"]
+        ],
+        on=["conversation_id", "utterance_index"],
+        how="inner",
+    ).sort_values(["conversation_id", "utterance_index"])
 
     docs = []
-    for conv_id, group in merged.groupby('conversation_id'):
-        docs.append({
-            "_id": f"conv_{conv_id}",
-            "conversation_id": str(conv_id),
-            "split": str(group['split'].iloc[0]),
-            "has_attack": bool(group['has_attack'].iloc[0]),
-            "symbol_sequence": [str(s) for s in list(seq_map.get(conv_id, []))],
-            "utterances": [
-                {
-                    "speaker": str(row['speaker']),
-                    "clean_text": str(row['clean_text']),
-                    "toxicity": round(float(row['toxicity']), 4)
-                } for _, row in group.iterrows()
-            ]
-        })
+    for conv_id, group in merged.groupby("conversation_id"):
+        docs.append(
+            {
+                "_id": f"conv_{conv_id}",
+                "conversation_id": str(conv_id),
+                "split": str(group["split"].iloc[0]),
+                "has_attack": bool(group["has_attack"].iloc[0]),
+                "symbol_sequence": [
+                    str(state) for state in list(seq_map.get(conv_id, []))
+                ],
+                "utterances": [
+                    {
+                        "speaker": str(row["speaker"]),
+                        "clean_text": str(row["clean_text"]),
+                        "toxicity": round(float(row["toxicity"]), 4),
+                    }
+                    for _, row in group.iterrows()
+                ],
+            }
+        )
 
-    db["conversations"].drop()
-    db["conversations"].insert_many(docs)
-    redis_client = fakeredis.FakeStrictRedis()
+    mongo_client, db, database_mode = connect_database(
+        _setting_from_config("MONGODB_URI")
+    )
+    seed_reference_data(db, mined_patterns, docs)
+    redis_client, redis_mode = connect_cache(_setting_from_config("REDIS_URL"))
 
-    return model, tokenizer, vader, detoxify_model, mined_patterns, db, redis_client, device
+    return (
+        model,
+        tokenizer,
+        vader,
+        detoxify_model,
+        mined_patterns,
+        db,
+        redis_client,
+        device,
+        database_mode,
+        redis_mode,
+        mongo_client,
+    )
 
-model, tokenizer, vader, detoxify_model, mined_patterns, db, redis_client, device = load_all()
+
+try:
+    (
+        model,
+        tokenizer,
+        vader,
+        detoxify_model,
+        mined_patterns,
+        db,
+        redis_client,
+        device,
+        database_mode,
+        redis_mode,
+        mongo_client,
+    ) = load_all()
+except Exception as exc:
+    logger.exception("ConversationGuardian startup failed")
+    st.error(
+        "ConversationGuardian could not finish loading. Check the app logs for "
+        "model downloads, dataset files, or MongoDB connection problems."
+    )
+    st.caption(f"Startup failure type: {type(exc).__name__}")
+    st.stop()
 
 # 3. Helper Functions
 def clean_wikipedia_text(text: str) -> str:
@@ -148,6 +228,31 @@ def toxicity_score_for_message(text: str) -> float:
     return float(scores[0])
 
 
+def cached_toxicity_score(text: str) -> float:
+    """Cache model scores by a message hash without storing the message in Redis."""
+    cache_key = "convoguard:v1:toxicity:" + hashlib.sha256(
+        text.encode("utf-8")
+    ).hexdigest()
+    try:
+        cached = redis_client.get(cache_key)
+        if cached is not None:
+            redis_client.incr("convoguard:stats:toxicity_cache_hits")
+            cached_score = float(cached)
+            if np.isfinite(cached_score):
+                return cached_score
+    except Exception:
+        # The app remains usable if an external cache has a transient failure.
+        pass
+
+    score = toxicity_score_for_message(text)
+    try:
+        redis_client.incr("convoguard:stats:toxicity_cache_misses")
+        redis_client.set(cache_key, str(score), ex=86400)
+    except Exception:
+        pass
+    return score
+
+
 def is_prefix_match(symbol_prefix: list, mined_pattern: list) -> bool:
     if len(symbol_prefix) >= len(mined_pattern) or all(s == "POSITIVE" for s in symbol_prefix):
         return False
@@ -173,7 +278,7 @@ def analyze_conversation(messages: list) -> dict:
 
     for idx, msg in enumerate(clean_msgs):
         s_score = float(vader.polarity_scores(msg)['compound']) if msg != "[EMPTY_MESSAGE]" else 0.0
-        t_score = toxicity_score_for_message(msg) if msg != "[EMPTY_MESSAGE]" else 0.0
+        t_score = cached_toxicity_score(msg) if msg != "[EMPTY_MESSAGE]" else 0.0
 
         cites = POLICY_REGEX.findall(msg)
         is_policy = len(cites) > 0
@@ -213,9 +318,9 @@ def analyze_conversation(messages: list) -> dict:
     # `decision` (the verdict banner) is a function of risk_score and
     # max_toxicity ONLY. Policy citations and pattern matches are informational
     # context added to `explanation` - they can NEVER change the verdict.
-    # This was previously an override (policy citations downgraded high-risk
-    # scores to "Moderate"); an ablation study showed that override reduced
-    # recall by 14 points, so it has been removed. Do not reintroduce it.
+    # Policy citations and mined patterns are explanatory context only. Do not
+    # change the verdict based on a policy-citation heuristic or an unsupported
+    # claim about predictive value.
     # =========================================================================
     pattern_is_trustworthy = (
         matched_pat is not None
@@ -223,30 +328,35 @@ def analyze_conversation(messages: list) -> dict:
     )
 
     if max_toxicity >= 0.3597:
-        decision = "HIGH RISK (PERSONAL ATTACK DETECTED)"
+        decision = "HIGH RISK (TOXICITY FLAG — REVIEW REQUIRED)"
         explanation = (
-            f"Personal Attack Detected: Toxic language detected in message text (Peak Toxicity: {max_toxicity:.1%}).\n\n"
-            f"Recommended Moderator Action: Remove toxic comment immediately and issue user warning per WP:CIVIL guidelines."
+            f"Toxicity flag: the toxicity model score reached {max_toxicity:.1%}. "
+            f"Toxicity alone does not prove a targeted personal attack; context, quotation, "
+            f"and the intended target matter.\n\n"
+            f"Recommended Moderator Action: Review the flagged message and surrounding turns. "
+            f"Do not remove a comment solely because of this score."
         )
     elif risk_score >= HIGH_RISK_THRESHOLD:
-        decision = "HIGH RISK (MODEL-PREDICTED ESCALATION)"
+        decision = "HIGH MODEL SCORE (REVIEW REQUIRED)"
         explanation = (
-            f"High Risk Predicted: DistilBERT model predicts a {risk_score:.1%} derailment probability "
-            f"from text content alone (no toxic language detected yet - this is an early warning).\n\n"
-            f"Recommended Moderator Action: Flag thread for moderator review."
+            f"High model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
+            f"This score is not established as calibrated, and this full-thread simulator is not by itself "
+            f"evidence of forecast accuracy.\n\n"
+            f"Recommended Moderator Action: Flag the thread for human moderator review."
         )
     elif risk_score >= MODERATE_RISK_THRESHOLD:
-        decision = "MODERATE RISK"
+        decision = "MODERATE MODEL SCORE"
         explanation = (
-            f"Moderate Risk: DistilBERT predicts a {risk_score:.1%} derailment probability - "
-            f"elevated but not high-confidence.\n\n"
-            f"Recommended Moderator Action: Monitor thread."
+            f"Moderate model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
+            f"The score is not established as calibrated.\n\n"
+            f"Recommended Moderator Action: Review context and monitor the thread."
         )
     else:
-        decision = "LOW RISK (HEALTHY CONVERSATION)"
+        decision = "LOW MODEL SCORE (NOT A SAFETY GUARANTEE)"
         explanation = (
-            f"Healthy Conversation: DistilBERT risk score is {risk_score:.1%}. Language remains civil.\n\n"
-            f"Recommended Moderator Action: No moderator intervention required."
+            f"Lower model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
+            f"This does not prove the conversation is safe or that no attack will occur.\n\n"
+            f"Recommended Moderator Action: No immediate flag from this model score; use moderator judgment."
         )
 
     # --- Informational context only - never changes `decision` above ---
@@ -254,21 +364,22 @@ def analyze_conversation(messages: list) -> dict:
         cites_str = ", ".join(set(found_cites))
         explanation += (
             f"\n\nContext: Wikipedia policy citations detected ({cites_str}). "
-            f"This is shown for context only and does not affect the risk tier - "
-            f"our ablation study found policy citations do not reliably predict lower risk."
+            f"This is shown for context only and does not affect the risk tier. "
+            f"A policy citation should not be treated as proof that a conversation is safe."
         )
 
     if pattern_is_trustworthy:
         explanation += (
             f"\n\nHistorical evidence: sequence matches pattern '{matched_pat['pattern_str']}' "
-            f"({matched_pat['derailed_support']} derailed vs {matched_pat['healthy_support']} healthy past cases, "
-            f"{matched_pat['support_ratio']}x multiplier)."
+            f"({matched_pat['derailed_support']} attack-labelled vs {matched_pat['healthy_support']} healthy historical cases; "
+            f"support ratio {matched_pat['support_ratio']}). This is descriptive historical evidence, not a causal effect "
+            f"and does not multiply the DistilBERT score."
         )
     elif matched_pat:
         explanation += (
             f"\n\nWeak historical match: pattern '{matched_pat['pattern_str']}' has too few healthy-case "
-            f"observations ({matched_pat.get('healthy_support', 0)}) for a statistically reliable multiplier - "
-            f"shown for reference only, not used in the verdict."
+            f"observations ({matched_pat.get('healthy_support', 0)}) for a stable ratio; "
+            f"shown for reference only and not used in the verdict."
         )
 
     return {
@@ -279,9 +390,24 @@ def analyze_conversation(messages: list) -> dict:
     }
 
 # 4. Streamlit UI Layout
-st.title("ConversationGuardian - Moderator Command Center")
+st.markdown('<div class="cg-eyebrow">WIKIPEDIA DISCUSSION INTELLIGENCE</div>', unsafe_allow_html=True)
+st.title("ConversationGuardian")
+st.markdown(
+    '<div class="cg-subtitle"><b>Problem:</b> Can the first 25–75% of a discussion help identify '
+    'conversations that are attack-labelled overall? Compare prefix-based sequence models and use '
+    'NoSQL queries, aggregation, and moderator notes to support human review.</div>',
+    unsafe_allow_html=True,
+)
+if "mongomock" in database_mode:
+    st.warning("Database is running in in-memory demo mode. Data will not persist after the app restarts. Configure MONGODB_URI to use a real MongoDB database.")
+else:
+    st.success("MongoDB is connected. Reference data is upserted; collections are not dropped.")
+if "fakeredis" in redis_mode:
+    st.caption("Redis cache: in-memory demo mode; cache entries disappear on restart.")
+else:
+    st.caption("Redis cache: persistent connection enabled.")
 
-tab1, tab2, tab3 = st.tabs(["Live Risk Simulator", "Pattern Catalog Explorer", "NoSQL Database Analytics"])
+tab1, tab2, tab3, tab4 = st.tabs(["Risk Simulator", "Pattern Catalog", "NoSQL Lab", "Sequential Results"])
 
 CATEGORIZED_PRESETS = {
     "Escalation (High Risk)": {
@@ -312,6 +438,11 @@ with tab1:
 
     with col_input:
         st.subheader("Input Thread Simulator")
+        st.caption(
+            "This simulator scores the messages you provide. Use the Sequential Results tab for "
+            "measured prefix-horizon comparisons; the full-thread model score is not itself a "
+            "validated early-warning benchmark."
+        )
 
         input_mode = st.radio("Choose Input Method:", ["Scenario Presets", "Custom Typing (Multiline)"], horizontal=True)
 
@@ -337,7 +468,8 @@ with tab1:
                 with st.spinner("Analyzing conversation..."):
                     try:
                         analysis_result = analyze_conversation(user_lines)
-                    except (TypeError, ValueError, RuntimeError) as exc:
+                    except Exception as exc:
+                        logger.exception("Conversation analysis failed")
                         st.session_state.pop("analysis_result", None)
                         st.session_state.pop("analysis_input", None)
                         st.error(f"Analysis could not be completed ({type(exc).__name__}). Check the app logs for details.")
@@ -371,16 +503,19 @@ with tab1:
             m1.metric("DistilBERT Risk Score", f"{res['risk_score']:.1%}")
             m2.metric("Matched Pattern ID", str(res['matched_pattern']['pattern_id']) if res['matched_pattern'] else "None")
             if res['matched_pattern']:
-                ratio_label = f"{float(res['matched_pattern']['support_ratio']):.1f}x"
+                ratio_label = f"{float(res['matched_pattern']['support_ratio']):.2f}"
                 if not res['pattern_is_trustworthy']:
-                    ratio_label += " (weak evidence)"
-                m3.metric("Risk Multiplier", ratio_label)
+                    ratio_label += " (limited support)"
+                m3.metric("Pattern Support Ratio", ratio_label)
             else:
-                m3.metric("Risk Multiplier", "1.0x")
+                m3.metric("Pattern Support Ratio", "N/A")
 
-            if "HIGH RISK" in res['decision']: st.error(f"**Verdict:** {res['decision']}")
-            elif "MODERATE" in res['decision']: st.warning(f"**Verdict:** {res['decision']}")
-            else: st.success(f"**Verdict:** {res['decision']}")
+            if "HIGH" in res["decision"]:
+                st.error(f"**Triage signal:** {res['decision']}")
+            elif "MODERATE" in res["decision"]:
+                st.warning(f"**Triage signal:** {res['decision']}")
+            else:
+                st.info(f"**Triage signal:** {res['decision']}")
 
             st.write(f"**State Trajectory Flow:** `{' -> '.join(res['states'])}`")
             st.info(res['explanation'])
@@ -401,38 +536,445 @@ with tab1:
 
 with tab2:
     st.subheader(f"PrefixSpan Pattern Catalog Explorer ({len(mined_patterns)} Mined Trajectories)")
-    st.markdown("Searchable catalog of all leak-free escalation trajectories mined from Wikipedia history.")
+    st.markdown("Searchable catalog of state trajectories mined from the bundled processed conversations.")
     st.caption(
         f"Note: patterns with fewer than {MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO} healthy-case observations "
-        f"have statistically unstable support ratios - treat their multiplier as illustrative, not precise."
+        f"have limited evidence; treat their support ratios as descriptive, not precise risk multipliers."
     )
-    p_df = pd.DataFrame(mined_patterns)[['pattern_id', 'pattern_str', 'support_ratio', 'derailed_support', 'healthy_support']]
-    p_df['ratio_reliable'] = p_df['healthy_support'] >= MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO
-    st.dataframe(p_df, use_container_width=True, height=480)
+    p_df = pd.DataFrame(mined_patterns)[['pattern_id', 'pattern_str', 'pattern_length', 'support_ratio', 'derailed_support', 'healthy_support']]
+    p_df['Evidence strength'] = np.where(
+        p_df['healthy_support'] >= MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO,
+        "Stronger support",
+        "Limited support",
+    )
+    search_pattern = st.text_input("Filter by pattern text or ID", placeholder="e.g. NEGATIVE or PAT_12")
+    if search_pattern.strip():
+        q = search_pattern.strip()
+        mask = p_df["pattern_str"].str.contains(q, case=False, regex=False) | p_df["pattern_id"].astype(str).str.contains(q, case=False, regex=False)
+        p_df = p_df.loc[mask]
+    st.caption(f"Showing {len(p_df):,} pattern(s). Ratios are descriptive historical support ratios, not guaranteed causal effects.")
+    st.dataframe(p_df, use_container_width=True, height=480, hide_index=True)
 
 with tab3:
-    st.subheader("Interactive NoSQL Database Workbench (MongoDB)")
+    st.markdown("### Database overview")
+    st.markdown(
+        '<div class="cg-panel"><div class="cg-panel-title">Document model</div>'
+        '<div class="cg-panel-caption">A conversation is one document with an embedded utterances array. '
+        'This keeps the thread and its message-level scores together for common moderator reads. '
+        'Patterns and moderator notes live in separate collections.</div></div>',
+        unsafe_allow_html=True,
+    )
+    c1, c2, c3, c4, c5 = st.columns(5)
+    try:
+        c1.metric("Conversation documents", f"{db['conversations'].count_documents({}):,}")
+        c2.metric("Mined patterns", f"{db['mined_patterns'].count_documents({}):,}")
+        c3.metric("Moderator notes", f"{db['moderator_notes'].count_documents({}):,}")
+        c4.metric("MongoDB mode", "Persistent" if "persistent" in database_mode else "Demo")
+        cache_hits = int(redis_client.get("convoguard:stats:toxicity_cache_hits") or 0)
+        cache_misses = int(redis_client.get("convoguard:stats:toxicity_cache_misses") or 0)
+        c5.metric("Redis cache H / M", f"{cache_hits:,} / {cache_misses:,}")
+    except Exception:
+        st.info("Database statistics are temporarily unavailable.")
 
-    st.markdown("#### Live MongoDB Document Search")
-    query_speaker = st.text_input("Filter MongoDB Conversations by Speaker Name:", value="Jytdog")
-    if query_speaker:
-        matching_docs = list(db["conversations"].find({"utterances.speaker": query_speaker}).limit(1))
-        if matching_docs:
-            st.write(f"Found matching conversation documents in MongoDB for speaker `{query_speaker}`. Note the Embedded Schema pattern:")
-            for d in matching_docs:
-                d.pop("_id", None)
-                st.json(d)
-        else:
-            st.info(f"No conversation documents found for speaker `{query_speaker}`.")
+    with st.expander("Schema and indexes", expanded=False):
+        schema_col, index_col = st.columns(2)
+        with schema_col:
+            st.markdown("**Conversation document (example shape)**")
+            example_doc = db["conversations"].find_one({})
+            if example_doc:
+                st.json({
+                    "_id": example_doc.get("_id"),
+                    "conversation_id": example_doc.get("conversation_id"),
+                    "split": example_doc.get("split"),
+                    "has_attack": example_doc.get("has_attack"),
+                    "symbol_sequence": example_doc.get("symbol_sequence", [])[:8],
+                    "utterances": example_doc.get("utterances", [])[:2],
+                    "utterance_count": len(example_doc.get("utterances", [])),
+                })
+        with index_col:
+            st.markdown("**Conversation collection indexes**")
+            try:
+                index_names = list(db["conversations"].index_information().keys())
+                st.write(index_names)
+            except Exception as exc:
+                st.info(f"Index details unavailable ({type(exc).__name__}).")
+            st.caption("Indexes support conversation-ID lookup, nested speaker/toxicity filters, and attack/split filtering.")
 
     st.markdown("---")
-    st.markdown("#### MongoDB `$unwind` Aggregation Pipeline Analytics")
+    st.markdown("### 1. Query embedded conversation documents")
+    query_col, limit_col = st.columns([3, 1])
+    with query_col:
+        query_speaker = st.text_input(
+            "Search by exact speaker name",
+            value="Jytdog",
+            help="This filters the nested utterances.speaker field.",
+        )
+    with limit_col:
+        result_limit = st.selectbox("Maximum results", [1, 3, 5, 10], index=1)
+    if query_speaker.strip():
+        matching_docs = list(
+            db["conversations"]
+            .find({"utterances.speaker": query_speaker.strip()})
+            .limit(int(result_limit))
+        )
+        st.caption(f"Query returned {len(matching_docs)} matching document(s).")
+        if matching_docs:
+            for document in matching_docs:
+                with st.expander(
+                    f"Conversation {document.get('conversation_id', document.get('_id'))} "
+                    f"· {'Attack-labelled' if document.get('has_attack') else 'Healthy-labelled'}"
+                ):
+                    st.json(document)
+        else:
+            st.info(f"No conversation documents found for speaker \"{query_speaker.strip()}\".")
+    else:
+        st.caption("Enter a speaker name to search the embedded utterances array.")
+
+    if st.button(
+        "Explain speaker query plan",
+        disabled=not bool(query_speaker.strip()),
+        help="Shows index/execution statistics when connected to a real MongoDB server.",
+    ):
+        if "mongomock" in database_mode:
+            st.info(
+                "Server-side explain statistics require real MongoDB. "
+                "Connect with MONGODB_URI to demonstrate the winning plan and index usage."
+            )
+        else:
+            try:
+                explain_result = db.command(
+                    "explain",
+                    {
+                        "find": "conversations",
+                        "filter": {"utterances.speaker": query_speaker.strip()},
+                        "limit": int(result_limit),
+                    },
+                    verbosity="executionStats",
+                )
+                execution_stats = explain_result.get("executionStats", {})
+                e1, e2, e3 = st.columns(3)
+                e1.metric("Documents examined", f"{execution_stats.get('totalDocsExamined', 0):,}")
+                e2.metric("Index keys examined", f"{execution_stats.get('totalKeysExamined', 0):,}")
+                e3.metric("Returned", f"{execution_stats.get('nReturned', 0):,}")
+                with st.expander("Winning query plan"):
+                    st.json(explain_result.get("queryPlanner", {}).get("winningPlan", {}))
+            except Exception as exc:
+                logger.exception("MongoDB explain failed")
+                st.warning(
+                    f"MongoDB explain is unavailable ({type(exc).__name__}); "
+                    "verify server version and permissions."
+                )
+
+    st.markdown("---")
+    st.markdown("### 2. Compound-index query: attack label + dataset split")
+    st.caption(
+        "This query filters the first two fields of the has_attack + split compound index. "
+        "The result count and sample documents update with the selections."
+    )
+    label_col, split_col = st.columns(2)
+    with label_col:
+        selected_label_name = st.selectbox(
+            "Conversation label",
+            ["Attack-labelled", "Healthy-labelled"],
+            key="nosql_label_filter",
+        )
+    available_splits = sorted(
+        str(value)
+        for value in db["conversations"].distinct("split")
+        if value is not None
+    )
+    if not available_splits:
+        available_splits = ["train"]
+    with split_col:
+        selected_split = st.selectbox(
+            "Dataset split",
+            available_splits,
+            key="nosql_split_filter",
+        )
+    indexed_filter = {
+        "has_attack": selected_label_name == "Attack-labelled",
+        "split": selected_split,
+    }
+    filtered_count = db["conversations"].count_documents(indexed_filter)
+    st.caption(f"Matching conversation documents: {filtered_count:,}")
+    filter_samples = list(
+        db["conversations"].find(
+            indexed_filter,
+            {
+                "_id": 0,
+                "conversation_id": 1,
+                "has_attack": 1,
+                "split": 1,
+                "utterances": 1,
+            },
+        ).limit(5)
+    )
+    if filter_samples:
+        st.dataframe(
+            pd.DataFrame(
+                [
+                    {
+                        "Conversation ID": doc.get("conversation_id"),
+                        "Label": "Attack-labelled" if doc.get("has_attack") else "Healthy-labelled",
+                        "Split": doc.get("split"),
+                        "Turns": len(doc.get("utterances", [])),
+                    }
+                    for doc in filter_samples
+                ]
+            ),
+            use_container_width=True,
+            hide_index=True,
+        )
+    else:
+        st.info("No conversations matched these filters in the currently loaded corpus.")
+
+    if st.button("Explain label/split query plan"):
+        if "mongomock" in database_mode:
+            st.info(
+                "A real server's query planner and index-usage statistics require MongoDB. "
+                "The filter itself runs in demo mode, but this is not evidence of server-side index use."
+            )
+        else:
+            try:
+                explain_result = db.command(
+                    "explain",
+                    {
+                        "find": "conversations",
+                        "filter": indexed_filter,
+                        "limit": 5,
+                    },
+                    verbosity="executionStats",
+                )
+                execution_stats = explain_result.get("executionStats", {})
+                e1, e2, e3 = st.columns(3)
+                e1.metric("Documents examined", f"{execution_stats.get('totalDocsExamined', 0):,}")
+                e2.metric("Index keys examined", f"{execution_stats.get('totalKeysExamined', 0):,}")
+                e3.metric("Returned", f"{execution_stats.get('nReturned', 0):,}")
+                with st.expander("Winning label/split query plan"):
+                    st.json(explain_result.get("queryPlanner", {}).get("winningPlan", {}))
+            except Exception as exc:
+                logger.exception("MongoDB label/split explain failed")
+                st.warning(f"Explain is unavailable ({type(exc).__name__}); check MongoDB permissions/version.")
+
+    st.markdown("---")
+    st.markdown("### 3. Moderator notes — Create, Read, Update, Delete")
+    st.caption(
+        "Notes are stored separately from the reference conversation corpus. "
+        "Saving a note for an existing conversation creates it or updates the existing note."
+    )
+    write_col, read_col = st.columns(2, gap="large")
+    with write_col:
+        with st.form("moderator_note_form", clear_on_submit=False):
+            note_conversation_id = st.text_input(
+                "Conversation ID",
+                placeholder="Paste a conversation_id from the search results",
+            )
+            note_text = st.text_area(
+                "Moderator note",
+                placeholder="Record why this thread needs follow-up...",
+                height=120,
+            )
+            save_note = st.form_submit_button(
+                "Save / update note", type="primary", use_container_width=True
+            )
+        if save_note:
+            conv_id = note_conversation_id.strip()
+            clean_note = note_text.strip()
+            if not conv_id or not clean_note:
+                st.warning("Enter both a conversation ID and a note.")
+            elif not db["conversations"].find_one({"conversation_id": conv_id}, {"_id": 1}):
+                st.warning("That conversation ID is not present in the loaded reference corpus.")
+            else:
+                now = datetime.now(timezone.utc).isoformat()
+                db["moderator_notes"].update_one(
+                    {"_id": conv_id},
+                    {"$set": {
+                        "conversation_id": conv_id,
+                        "note": clean_note,
+                        "updated_at": now,
+                        "updated_by": "moderator-demo",
+                    }},
+                    upsert=True,
+                )
+                st.success("Moderator note saved.")
+                st.rerun()
+
+    with read_col:
+        st.markdown("**Saved notes**")
+        notes = list(
+            db["moderator_notes"].find({}).sort("updated_at", -1).limit(50)
+        )
+        if notes:
+            for note in notes:
+                with st.expander(
+                    f"{note.get('conversation_id', note.get('_id'))} · {note.get('updated_at', '')[:19]}"
+                ):
+                    st.write(note.get("note", ""))
+                    st.caption(f"Updated by {note.get('updated_by', 'unknown')}")
+                    if st.button(
+                        "Delete this note",
+                        key=f"delete-note-{note.get('_id')}",
+                        type="secondary",
+                    ):
+                        db["moderator_notes"].delete_one({"_id": note["_id"]})
+                        st.success("Note deleted.")
+                        st.rerun()
+        else:
+            st.info("No moderator notes saved yet. Create one using the form.")
+
+    st.markdown("---")
+    st.markdown("### 4. Aggregation pipeline: most toxic-comment speakers")
+    st.caption(
+        "Uses $unwind to expand embedded utterances, $match to filter toxicity, "
+        "$group to count by speaker, then $sort and $limit."
+    )
     pipeline = [
         {"$unwind": "$utterances"},
         {"$match": {"utterances.toxicity": {"$gte": 0.3597}}},
         {"$group": {"_id": "$utterances.speaker", "toxic_comment_count": {"$sum": 1}}},
         {"$sort": {"toxic_comment_count": -1}},
-        {"$limit": 5}
+        {"$limit": 5},
     ]
-    top_speakers_df = pd.DataFrame(list(db["conversations"].aggregate(pipeline))).rename(columns={"_id": "Speaker Name", "toxic_comment_count": "Toxic Comments Count"})
-    st.dataframe(top_speakers_df, use_container_width=True)
+    try:
+        aggregation_results = list(db["conversations"].aggregate(pipeline))
+        top_speakers_df = pd.DataFrame(aggregation_results).rename(
+            columns={"_id": "Speaker name", "toxic_comment_count": "Toxic comments"}
+        )
+        st.dataframe(top_speakers_df, use_container_width=True, hide_index=True)
+        with st.expander("View the pipeline"):
+            st.code(json.dumps(pipeline, indent=2), language="json")
+    except Exception as exc:
+        st.error(f"Aggregation failed ({type(exc).__name__}). Check MongoDB compatibility and app logs.")
+
+
+with tab4:
+    st.subheader("Sequential forecasting — measured results")
+    st.markdown(
+        "This page reads the benchmark output generated by the repository's reproducible "
+        "conversation-level experiment. It does not fabricate or recompute scores in the UI."
+    )
+    benchmark_dir = PROJECT_DIR / "reports" / "generated"
+    summary_path = benchmark_dir / "sequence_benchmark_summary.csv"
+    report_path = benchmark_dir / "sequence_benchmark_metrics.json"
+
+    if not summary_path.exists() or not report_path.exists():
+        st.info(
+            "Benchmark files are not present in this checkout yet. From the repository root, "
+            "run the following command and then refresh this page:"
+        )
+        st.code(
+            "python scripts/run_sequence_benchmark.py --output reports/generated",
+            language="bash",
+        )
+    else:
+        try:
+            benchmark_summary = pd.read_csv(summary_path)
+            benchmark_report = json.loads(report_path.read_text(encoding="utf-8"))
+            required_columns = {
+                "model", "prefix_label", "prefix_fraction", "macro_f1",
+                "attack_f1", "attack_recall", "pr_auc", "roc_auc",
+                "balanced_accuracy", "brier_score",
+            }
+            if missing := required_columns - set(benchmark_summary.columns):
+                raise ValueError(
+                    f"Benchmark CSV is missing columns: {sorted(missing)}"
+                )
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            st.error(
+                f"Benchmark report could not be read ({type(exc).__name__}). "
+                "Regenerate it using the command above."
+            )
+        else:
+            integrity = benchmark_report.get("split_integrity", {})
+            n1, n2, n3 = st.columns(3)
+            n1.metric("Conversations", f"{benchmark_report.get('n_conversations', 0):,}")
+            n2.metric("Training conversations", f"{benchmark_report.get('n_train', 0):,}")
+            n3.metric("Holdout conversations", f"{benchmark_report.get('n_test', 0):,}")
+            if integrity.get("train_holdout_id_overlap_count") == 0:
+                st.success(
+                    "Split audit passed: train/holdout conversation-ID overlap = 0. "
+                    "These are internal holdout results, not official CGA-Wiki test results."
+                )
+            else:
+                st.error(
+                    "Split integrity audit did not report zero train/holdout overlap. "
+                    "Do not use these metrics until the issue is resolved."
+                )
+
+            numeric_rows = benchmark_summary[
+                benchmark_summary["prefix_fraction"].notna()
+            ].copy()
+            numeric_rows["prefix_fraction"] = pd.to_numeric(
+                numeric_rows["prefix_fraction"], errors="coerce"
+            )
+            model_options = [
+                model_name
+                for model_name in [
+                    "TF-IDF text baseline",
+                    "Word + character TF-IDF",
+                    "State-frequency ablation (orderless)",
+                    "Ordered-state n-gram model",
+                    "Hybrid text + state sequence",
+                ]
+                if model_name in set(numeric_rows["model"])
+            ]
+            selected_models = st.multiselect(
+                "Models to compare",
+                model_options,
+                default=model_options,
+                key="sequence_results_models",
+            )
+            metric_options = {
+                "Macro-F1": "macro_f1",
+                "Attack F1": "attack_f1",
+                "Attack recall": "attack_recall",
+                "PR-AUC": "pr_auc",
+                "ROC-AUC": "roc_auc",
+                "Balanced accuracy": "balanced_accuracy",
+            }
+            metric_label = st.selectbox(
+                "Metric", list(metric_options), key="sequence_results_metric"
+            )
+            metric_column = metric_options[metric_label]
+            chart_data = numeric_rows[
+                numeric_rows["model"].isin(selected_models)
+            ].pivot(
+                index="prefix_label",
+                columns="model",
+                values=metric_column,
+            )
+            horizon_order = [label for label in ["25%", "50%", "75%", "100%"] if label in chart_data.index]
+            chart_data = chart_data.reindex(horizon_order)
+            if selected_models and not chart_data.empty:
+                st.line_chart(chart_data)
+            else:
+                st.info("Select at least one model to draw the comparison.")
+
+            st.caption(
+                "The 25%, 50%, and 75% rows are the early-warning horizons. "
+                "The 100% row uses the full conversation and is shown as a context-only comparison."
+            )
+            display_columns = [
+                column for column in [
+                    "model", "prefix_label", "n_train", "n_test", "accuracy",
+                    "balanced_accuracy", "macro_f1", "attack_precision",
+                    "attack_recall", "attack_f1", "pr_auc", "roc_auc",
+                    "brier_score", "macro_f1_bootstrap_95ci",
+                ] if column in benchmark_summary.columns
+            ]
+            st.dataframe(
+                benchmark_summary[display_columns],
+                use_container_width=True,
+                hide_index=True,
+            )
+            with st.expander("Evaluation protocol and split audit"):
+                st.write(benchmark_report.get("evaluation_protocol", ""))
+                st.warning(benchmark_report.get("interpretation_limit", ""))
+                st.json(
+                    {
+                        "random_seed": benchmark_report.get("random_seed"),
+                        "positive_label": benchmark_report.get("positive_label"),
+                        "split_integrity": integrity,
+                        "model_descriptions": benchmark_report.get("model_descriptions", {}),
+                    }
+                )
