@@ -7,6 +7,11 @@ on:
       - upgrade/**
   pull_request:
 
+# Keep only the newest check run for each branch/PR ref when several files are edited.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   database-and-sequence-tests:
     runs-on: ubuntu-latest
