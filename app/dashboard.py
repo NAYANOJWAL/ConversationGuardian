@@ -1,32 +1,49 @@
-import re
-import json
 import html
-import time
-import torch
-import pandas as pd
-import numpy as np
+import json
+import os
+import re
+from datetime import datetime, timezone
 from pathlib import Path
-import streamlit as st
 
-import pymongo
-import mongomock
 import fakeredis
-
-import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import numpy as np
+import pandas as pd
+import streamlit as st
+import torch
 from detoxify import Detoxify
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+try:
+    from app.database import connect_database, seed_reference_data
+except ModuleNotFoundError:
+    # Supports launching Streamlit from inside the app/ directory.
+    from database import connect_database, seed_reference_data
 
 # 1. Page Config & Custom CSS Styling
 st.set_page_config(page_title="ConversationGuardian - Moderator Command Center", layout="wide")
 
 st.markdown("""
 <style>
-    .chat-card-toxic { background-color: #321c1c; border-left: 5px solid #e53e3e; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #fff5f5; }
-    .chat-card-policy { background-color: #322d1c; border-left: 5px solid #d69e2e; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #fffaf0; }
-    .chat-card-civil { background-color: #1c3226; border-left: 5px solid #38a169; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #f0fff4; }
-    .chat-card-neu { background-color: #1a202c; border-left: 5px solid #a0aec0; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #ffffff; }
-    .meta-tag { font-size: 0.8rem; opacity: 0.85; margin-top: 4px; }
+    :root { --cg-ink: #e6edf7; --cg-muted: #9aa9bd; --cg-border: rgba(148,163,184,.22); }
+    .block-container { max-width: 1450px; padding-top: 2rem; padding-bottom: 3rem; }
+    [data-testid="stAppViewContainer"] { background: radial-gradient(ellipse at top left, rgba(42,76,122,.24), transparent 42%), #0b1120; }
+    [data-testid="stHeader"] { background: transparent; }
+    h1, h2, h3 { letter-spacing: -.025em; }
+    .cg-eyebrow { text-transform: uppercase; letter-spacing: .15em; font-size: .72rem; font-weight: 700; color: #7dd3fc; margin-bottom: .35rem; }
+    .cg-subtitle { color: #aebbd0; font-size: 1rem; line-height: 1.6; max-width: 850px; margin-bottom: 1rem; }
+    .cg-panel { border: 1px solid var(--cg-border); border-radius: 16px; padding: 1rem 1.15rem; background: rgba(18,28,47,.72); margin: .35rem 0 1rem; }
+    .cg-panel-title { font-weight: 700; font-size: 1rem; margin-bottom: .25rem; }
+    .cg-panel-caption { color: #aebbd0; font-size: .86rem; line-height: 1.5; }
+    .chat-card-toxic { background-color: #321c1c; border-left: 5px solid #ef4444; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #fff5f5; overflow-wrap: anywhere; }
+    .chat-card-policy { background-color: #322d1c; border-left: 5px solid #fbbf24; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #fffaf0; overflow-wrap: anywhere; }
+    .chat-card-civil { background-color: #17352c; border-left: 5px solid #34d399; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #f0fff4; overflow-wrap: anywhere; }
+    .chat-card-neu { background-color: #182337; border-left: 5px solid #94a3b8; padding: 14px; border-radius: 9px; margin-bottom: 10px; color: #f8fafc; overflow-wrap: anywhere; }
+    .meta-tag { font-size: .8rem; opacity: .9; margin-top: 7px; color: #d1d9e6; }
+    div[data-testid="stMetric"] { background: rgba(21,34,56,.72); border: 1px solid var(--cg-border); border-radius: 13px; padding: 12px 14px; }
+    div[data-testid="stTabs"] button { font-weight: 650; }
+    div[data-testid="stForm"] { border-color: var(--cg-border); }
+    .stButton > button[kind="primary"] { border-radius: 10px; font-weight: 700; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -52,64 +69,112 @@ HIGH_RISK_THRESHOLD = 0.65
 MODERATE_RISK_THRESHOLD = 0.45
 MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO = 5  # patterns below this show as "weak evidence", not a headline multiplier
 
-@st.cache_resource
-def load_all():
-    import nltk
-    nltk.download('vader_lexicon', quiet=True)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+def _mongodb_uri_from_config() -> str | None:
+    """Read the MongoDB URI from environment variables or Streamlit secrets."""
+    uri = os.getenv("MONGODB_URI", "").strip()
+    if not uri:
+        try:
+            uri = str(st.secrets.get("MONGODB_URI", "")).strip()
+        except Exception:
+            uri = ""
+    return uri or None
 
+
+@st.cache_resource(show_spinner="Loading ConversationGuardian models and data...")
+def load_all():
+    nltk_download_ok = False
+    import nltk
+
+    try:
+        nltk_download_ok = nltk.download("vader_lexicon", quiet=True)
+    except Exception:
+        pass
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR)
     model = AutoModelForSequenceClassification.from_pretrained(MODEL_DIR).to(device)
     model.eval()
 
     vader = SentimentIntensityAnalyzer()
-    detoxify_model = Detoxify('original', device=device.type)
+    detoxify_model = Detoxify("original", device=device.type)
 
-    with open(PATTERNS_DIR / "mined_patterns.json", "r", encoding="utf-8") as f:
-        mined_patterns = json.load(f)
-
-    mongo_client = mongomock.MongoClient()
-    db = mongo_client["ConversationGuardian"]
-
-    db["mined_patterns"].drop()
-    db["mined_patterns"].insert_many([{**p, "_id": str(p["pattern_id"])} for p in mined_patterns])
+    with open(PATTERNS_DIR / "mined_patterns.json", "r", encoding="utf-8") as file:
+        mined_patterns = json.load(file)
 
     train_cleaned = pd.read_parquet(CLEANED_DIR / "train_cleaned.parquet")
     train_feats = pd.read_parquet(FEATURES_DIR / "train_features.parquet")
     train_seqs = pd.read_parquet(SEQUENCES_DIR / "train_sequences.parquet")
-    seq_map = train_seqs.set_index('conversation_id')['symbol_sequence'].to_dict()
+    seq_map = train_seqs.set_index("conversation_id")["symbol_sequence"].to_dict()
 
     merged = pd.merge(
         train_cleaned,
-        train_feats[['conversation_id', 'utterance_index', 'sentiment_compound', 'toxicity']],
-        on=['conversation_id', 'utterance_index'],
-        how='inner'
-    ).sort_values(['conversation_id', 'utterance_index'])
+        train_feats[
+            ["conversation_id", "utterance_index", "sentiment_compound", "toxicity"]
+        ],
+        on=["conversation_id", "utterance_index"],
+        how="inner",
+    ).sort_values(["conversation_id", "utterance_index"])
 
     docs = []
-    for conv_id, group in merged.groupby('conversation_id'):
-        docs.append({
-            "_id": f"conv_{conv_id}",
-            "conversation_id": str(conv_id),
-            "split": str(group['split'].iloc[0]),
-            "has_attack": bool(group['has_attack'].iloc[0]),
-            "symbol_sequence": [str(s) for s in list(seq_map.get(conv_id, []))],
-            "utterances": [
-                {
-                    "speaker": str(row['speaker']),
-                    "clean_text": str(row['clean_text']),
-                    "toxicity": round(float(row['toxicity']), 4)
-                } for _, row in group.iterrows()
-            ]
-        })
+    for conv_id, group in merged.groupby("conversation_id"):
+        docs.append(
+            {
+                "_id": f"conv_{conv_id}",
+                "conversation_id": str(conv_id),
+                "split": str(group["split"].iloc[0]),
+                "has_attack": bool(group["has_attack"].iloc[0]),
+                "symbol_sequence": [
+                    str(state) for state in list(seq_map.get(conv_id, []))
+                ],
+                "utterances": [
+                    {
+                        "speaker": str(row["speaker"]),
+                        "clean_text": str(row["clean_text"]),
+                        "toxicity": round(float(row["toxicity"]), 4),
+                    }
+                    for _, row in group.iterrows()
+                ],
+            }
+        )
 
-    db["conversations"].drop()
-    db["conversations"].insert_many(docs)
+    mongo_client, db, database_mode = connect_database(_mongodb_uri_from_config())
+    seed_reference_data(db, mined_patterns, docs)
     redis_client = fakeredis.FakeStrictRedis()
 
-    return model, tokenizer, vader, detoxify_model, mined_patterns, db, redis_client, device
+    return (
+        model,
+        tokenizer,
+        vader,
+        detoxify_model,
+        mined_patterns,
+        db,
+        redis_client,
+        device,
+        database_mode,
+        mongo_client,
+    )
 
-model, tokenizer, vader, detoxify_model, mined_patterns, db, redis_client, device = load_all()
+
+try:
+    (
+        model,
+        tokenizer,
+        vader,
+        detoxify_model,
+        mined_patterns,
+        db,
+        redis_client,
+        device,
+        database_mode,
+        mongo_client,
+    ) = load_all()
+except Exception as exc:
+    st.error(
+        "ConversationGuardian could not finish loading. Check the app logs for "
+        "model downloads, dataset files, or MongoDB connection problems."
+    )
+    st.caption(f"Startup failure type: {type(exc).__name__}")
+    st.stop()
 
 # 3. Helper Functions
 def clean_wikipedia_text(text: str) -> str:
@@ -279,9 +344,19 @@ def analyze_conversation(messages: list) -> dict:
     }
 
 # 4. Streamlit UI Layout
-st.title("ConversationGuardian - Moderator Command Center")
+st.markdown('<div class="cg-eyebrow">WIKIPEDIA DISCUSSION INTELLIGENCE</div>', unsafe_allow_html=True)
+st.title("ConversationGuardian")
+st.markdown(
+    '<div class="cg-subtitle">Explore discussion risk, inspect mined escalation patterns, '
+    'and demonstrate document-database operations in one moderation workspace.</div>',
+    unsafe_allow_html=True,
+)
+if "mongomock" in database_mode:
+    st.warning("Database is running in in-memory demo mode. Data will not persist after the app restarts. Configure MONGODB_URI to use a real MongoDB database.")
+else:
+    st.success("MongoDB is connected. Reference data is upserted; collections are not dropped.")
 
-tab1, tab2, tab3 = st.tabs(["Live Risk Simulator", "Pattern Catalog Explorer", "NoSQL Database Analytics"])
+tab1, tab2, tab3 = st.tabs(["Risk Simulator", "Pattern Catalog", "NoSQL Lab"])
 
 CATEGORIZED_PRESETS = {
     "Escalation (High Risk)": {
@@ -406,33 +481,178 @@ with tab2:
         f"Note: patterns with fewer than {MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO} healthy-case observations "
         f"have statistically unstable support ratios - treat their multiplier as illustrative, not precise."
     )
-    p_df = pd.DataFrame(mined_patterns)[['pattern_id', 'pattern_str', 'support_ratio', 'derailed_support', 'healthy_support']]
-    p_df['ratio_reliable'] = p_df['healthy_support'] >= MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO
-    st.dataframe(p_df, use_container_width=True, height=480)
+    p_df = pd.DataFrame(mined_patterns)[['pattern_id', 'pattern_str', 'pattern_length', 'support_ratio', 'derailed_support', 'healthy_support']]
+    p_df['Evidence strength'] = np.where(
+        p_df['healthy_support'] >= MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO,
+        "Stronger support",
+        "Limited support",
+    )
+    search_pattern = st.text_input("Filter by pattern text or ID", placeholder="e.g. NEGATIVE or PAT_12")
+    if search_pattern.strip():
+        q = search_pattern.strip()
+        mask = p_df["pattern_str"].str.contains(q, case=False, regex=False) | p_df["pattern_id"].astype(str).str.contains(q, case=False, regex=False)
+        p_df = p_df.loc[mask]
+    st.caption(f"Showing {len(p_df):,} pattern(s). Ratios are descriptive historical support ratios, not guaranteed causal effects.")
+    st.dataframe(p_df, use_container_width=True, height=480, hide_index=True)
 
 with tab3:
-    st.subheader("Interactive NoSQL Database Workbench (MongoDB)")
+    st.markdown("### Database overview")
+    st.markdown(
+        '<div class="cg-panel"><div class="cg-panel-title">Document model</div>'
+        '<div class="cg-panel-caption">A conversation is one document with an embedded utterances array. '
+        'This keeps the thread and its message-level scores together for common moderator reads. '
+        'Patterns and moderator notes live in separate collections.</div></div>',
+        unsafe_allow_html=True,
+    )
+    c1, c2, c3, c4 = st.columns(4)
+    try:
+        c1.metric("Conversation documents", f"{db['conversations'].count_documents({}):,}")
+        c2.metric("Mined patterns", f"{db['mined_patterns'].count_documents({}):,}")
+        c3.metric("Moderator notes", f"{db['moderator_notes'].count_documents({}):,}")
+        c4.metric("MongoDB mode", "Persistent" if "persistent" in database_mode else "Demo")
+    except Exception:
+        st.info("Database statistics are temporarily unavailable.")
 
-    st.markdown("#### Live MongoDB Document Search")
-    query_speaker = st.text_input("Filter MongoDB Conversations by Speaker Name:", value="Jytdog")
-    if query_speaker:
-        matching_docs = list(db["conversations"].find({"utterances.speaker": query_speaker}).limit(1))
-        if matching_docs:
-            st.write(f"Found matching conversation documents in MongoDB for speaker `{query_speaker}`. Note the Embedded Schema pattern:")
-            for d in matching_docs:
-                d.pop("_id", None)
-                st.json(d)
-        else:
-            st.info(f"No conversation documents found for speaker `{query_speaker}`.")
+    with st.expander("Schema and indexes", expanded=False):
+        schema_col, index_col = st.columns(2)
+        with schema_col:
+            st.markdown("**Conversation document (example shape)**")
+            example_doc = db["conversations"].find_one({})
+            if example_doc:
+                st.json({
+                    "_id": example_doc.get("_id"),
+                    "conversation_id": example_doc.get("conversation_id"),
+                    "split": example_doc.get("split"),
+                    "has_attack": example_doc.get("has_attack"),
+                    "symbol_sequence": example_doc.get("symbol_sequence", [])[:8],
+                    "utterances": example_doc.get("utterances", [])[:2],
+                    "utterance_count": len(example_doc.get("utterances", [])),
+                })
+        with index_col:
+            st.markdown("**Conversation collection indexes**")
+            try:
+                index_names = list(db["conversations"].index_information().keys())
+                st.write(index_names)
+            except Exception as exc:
+                st.info(f"Index details unavailable ({type(exc).__name__}).")
+            st.caption("Indexes support conversation-ID lookup, nested speaker/toxicity filters, and attack/split filtering.")
 
     st.markdown("---")
-    st.markdown("#### MongoDB `$unwind` Aggregation Pipeline Analytics")
+    st.markdown("### 1. Query embedded conversation documents")
+    query_col, limit_col = st.columns([3, 1])
+    with query_col:
+        query_speaker = st.text_input(
+            "Search by exact speaker name",
+            value="Jytdog",
+            help="This filters the nested utterances.speaker field.",
+        )
+    with limit_col:
+        result_limit = st.selectbox("Maximum results", [1, 3, 5, 10], index=1)
+    if query_speaker.strip():
+        matching_docs = list(
+            db["conversations"]
+            .find({"utterances.speaker": query_speaker.strip()})
+            .limit(int(result_limit))
+        )
+        st.caption(f"Query returned {len(matching_docs)} matching document(s).")
+        if matching_docs:
+            for document in matching_docs:
+                with st.expander(
+                    f"Conversation {document.get('conversation_id', document.get('_id'))} "
+                    f"· {'Attack-labelled' if document.get('has_attack') else 'Healthy-labelled'}"
+                ):
+                    st.json(document)
+        else:
+            st.info(f"No conversation documents found for speaker \"{query_speaker.strip()}\".")
+    else:
+        st.caption("Enter a speaker name to search the embedded utterances array.")
+
+    st.markdown("---")
+    st.markdown("### 2. Moderator notes — Create, Read, Update, Delete")
+    st.caption(
+        "Notes are stored separately from the reference conversation corpus. "
+        "Saving a note for an existing conversation creates it or updates the existing note."
+    )
+    write_col, read_col = st.columns(2, gap="large")
+    with write_col:
+        with st.form("moderator_note_form", clear_on_submit=False):
+            note_conversation_id = st.text_input(
+                "Conversation ID",
+                placeholder="Paste a conversation_id from the search results",
+            )
+            note_text = st.text_area(
+                "Moderator note",
+                placeholder="Record why this thread needs follow-up...",
+                height=120,
+            )
+            save_note = st.form_submit_button(
+                "Save / update note", type="primary", use_container_width=True
+            )
+        if save_note:
+            conv_id = note_conversation_id.strip()
+            clean_note = note_text.strip()
+            if not conv_id or not clean_note:
+                st.warning("Enter both a conversation ID and a note.")
+            elif not db["conversations"].find_one({"conversation_id": conv_id}, {"_id": 1}):
+                st.warning("That conversation ID is not present in the loaded reference corpus.")
+            else:
+                now = datetime.now(timezone.utc).isoformat()
+                db["moderator_notes"].update_one(
+                    {"_id": conv_id},
+                    {"$set": {
+                        "conversation_id": conv_id,
+                        "note": clean_note,
+                        "updated_at": now,
+                        "updated_by": "moderator-demo",
+                    }},
+                    upsert=True,
+                )
+                st.success("Moderator note saved.")
+                st.rerun()
+
+    with read_col:
+        st.markdown("**Saved notes**")
+        notes = list(
+            db["moderator_notes"].find({}).sort("updated_at", -1).limit(50)
+        )
+        if notes:
+            for note in notes:
+                with st.expander(
+                    f"{note.get('conversation_id', note.get('_id'))} · {note.get('updated_at', '')[:19]}"
+                ):
+                    st.write(note.get("note", ""))
+                    st.caption(f"Updated by {note.get('updated_by', 'unknown')}")
+                    if st.button(
+                        "Delete this note",
+                        key=f"delete-note-{note.get('_id')}",
+                        type="secondary",
+                    ):
+                        db["moderator_notes"].delete_one({"_id": note["_id"]})
+                        st.success("Note deleted.")
+                        st.rerun()
+        else:
+            st.info("No moderator notes saved yet. Create one using the form.")
+
+    st.markdown("---")
+    st.markdown("### 3. Aggregation pipeline: most toxic-comment speakers")
+    st.caption(
+        "Uses $unwind to expand embedded utterances, $match to filter toxicity, "
+        "$group to count by speaker, then $sort and $limit."
+    )
     pipeline = [
         {"$unwind": "$utterances"},
         {"$match": {"utterances.toxicity": {"$gte": 0.3597}}},
         {"$group": {"_id": "$utterances.speaker", "toxic_comment_count": {"$sum": 1}}},
         {"$sort": {"toxic_comment_count": -1}},
-        {"$limit": 5}
+        {"$limit": 5},
     ]
-    top_speakers_df = pd.DataFrame(list(db["conversations"].aggregate(pipeline))).rename(columns={"_id": "Speaker Name", "toxic_comment_count": "Toxic Comments Count"})
-    st.dataframe(top_speakers_df, use_container_width=True)
+    try:
+        aggregation_results = list(db["conversations"].aggregate(pipeline))
+        top_speakers_df = pd.DataFrame(aggregation_results).rename(
+            columns={"_id": "Speaker name", "toxic_comment_count": "Toxic comments"}
+        )
+        st.dataframe(top_speakers_df, use_container_width=True, hide_index=True)
+        with st.expander("View the pipeline"):
+            st.code(json.dumps(pipeline, indent=2), language="json")
+    except Exception as exc:
+        st.error(f"Aggregation failed ({type(exc).__name__}). Check MongoDB compatibility and app logs.")
