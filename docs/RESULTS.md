@@ -16,9 +16,9 @@ This report is generated from the benchmark implementation and bundled processed
 | Random seed | 42 |
 | Train/holdout conversation-ID overlap | **0** |
 | Decision threshold | Fixed at 0.5; not tuned on the holdout |
-| Benchmark code revision | `7242cfafa51c58d52e87575e1904d2a523dbde1c` |
-| Successful GitHub Actions run | [Run 38862566322](https://github.com/NAYANOJWAL/ConversationGuardian/actions/runs/38862566322) |
-| Downloadable JSON/CSV/prediction artifact | [Benchmark artifact](https://github.com/NAYANOJWAL/ConversationGuardian/actions/runs/38862566322/artifacts/12030420865) |
+| Workflow run commit | `abaaddba1460c699830b0200a5fec1e876eb228c` (benchmark script unchanged since `7242cfafa51c58d52e87575e1904d2a523dbde1c`) |
+| Successful GitHub Actions run | [Run 38862671743](https://github.com/NAYANOJWAL/ConversationGuardian/actions/runs/38862671743) |
+| Downloadable JSON/CSV/prediction artifact | [Benchmark artifact](https://github.com/NAYANOJWAL/ConversationGuardian/actions/runs/38862671743/artifacts/12029691970) |
 
 The source snapshot contains only rows marked `train`; the 502 conversations are an **internal holdout sampled from that bundled training snapshot**, not an untouched official dataset test partition. Conversations, rather than comments, are the split unit so that turns from one conversation cannot appear in both training and holdout.
 
@@ -50,7 +50,7 @@ The 25%, 50%, and 75% rows represent early-warning horizons. The 100% row is a f
 | Ordered-state n-gram | 100% | 0.7590 | 0.7508 | 0.5777 | 0.8669 | 0.8208 |
 | Hybrid text + state sequence | 100% | **0.8127** | **0.8098** | 0.6892 | **0.9081** | **0.8834** |
 
-*Metrics reproduced from successful CI run 38862566322. Scores are rounded to four decimal places. The downloadable artifact contains the full JSON metrics, confusion matrices, bootstrap intervals, and holdout prediction probabilities.*
+*Metrics reproduced from successful CI run 38862671743. Scores are rounded to four decimal places. The downloadable artifact contains the full JSON metrics, confusion matrices, bootstrap intervals, and holdout prediction probabilities.*
 
 ## What the results support
 
