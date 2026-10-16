@@ -71,6 +71,58 @@ class DatabaseLayerTests(unittest.TestCase):
         self.assertIn("speaker_lookup", indexes)
         self.assertIn("toxicity_lookup", indexes)
 
+    def test_nested_query_aggregation_and_moderator_note_crud(self):
+        conversations = [
+            {
+                "_id": "conv_c1",
+                "conversation_id": "c1",
+                "split": "train",
+                "has_attack": False,
+                "symbol_sequence": ["NEUTRAL", "NEGATIVE_TOXIC"],
+                "utterances": [
+                    {"speaker": "EditorA", "clean_text": "Hello", "toxicity": 0.02},
+                    {"speaker": "EditorB", "clean_text": "Rude comment", "toxicity": 0.80},
+                ],
+            },
+            {
+                "_id": "conv_c2",
+                "conversation_id": "c2",
+                "split": "train",
+                "has_attack": True,
+                "symbol_sequence": ["NEGATIVE_TOXIC"],
+                "utterances": [
+                    {"speaker": "EditorB", "clean_text": "Another rude comment", "toxicity": 0.70},
+                ],
+            },
+        ]
+        seed_reference_data(self.db, [], conversations)
+
+        matches = list(self.db["conversations"].find({"utterances.speaker": "EditorB"}))
+        self.assertEqual({doc["conversation_id"] for doc in matches}, {"c1", "c2"})
+
+        pipeline = [
+            {"$unwind": "$utterances"},
+            {"$match": {"utterances.toxicity": {"$gte": 0.5}}},
+            {"$group": {"_id": "$utterances.speaker", "toxic_comment_count": {"$sum": 1}}},
+            {"$sort": {"toxic_comment_count": -1}},
+            {"$limit": 5},
+        ]
+        results = list(self.db["conversations"].aggregate(pipeline))
+        self.assertEqual(results[0]["_id"], "EditorB")
+        self.assertEqual(results[0]["toxic_comment_count"], 2)
+
+        notes = self.db["moderator_notes"]
+        notes.update_one(
+            {"_id": "c1"},
+            {"$set": {"conversation_id": "c1", "note": "Review context"}},
+            upsert=True,
+        )
+        self.assertEqual(notes.find_one({"_id": "c1"})["note"], "Review context")
+        notes.update_one({"_id": "c1"}, {"$set": {"note": "Reviewed"}})
+        self.assertEqual(notes.find_one({"_id": "c1"})["note"], "Reviewed")
+        notes.delete_one({"_id": "c1"})
+        self.assertIsNone(notes.find_one({"_id": "c1"}))
+
     def test_rejects_conversation_without_document_id(self):
         with self.assertRaisesRegex(ValueError, "_id"):
             seed_reference_data(
