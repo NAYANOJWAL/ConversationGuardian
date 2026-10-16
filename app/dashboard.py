@@ -767,6 +767,7 @@ with tab4:
                     "TF-IDF text baseline",
                     "State-frequency ablation (orderless)",
                     "Ordered-state n-gram model",
+                    "Hybrid text + state sequence",
                 ]
                 if model_name in set(numeric_rows["model"])
             ]
