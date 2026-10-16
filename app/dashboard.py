@@ -6,7 +6,6 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-import fakeredis
 import numpy as np
 import pandas as pd
 import streamlit as st
