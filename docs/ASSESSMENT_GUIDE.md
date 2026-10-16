@@ -19,7 +19,7 @@ The reproducible benchmark in scripts/run_sequence_benchmark.py:
 - holds out conversations, never individual comments, to prevent comments from the same thread crossing the train/holdout boundary;
 - trains only on the training portion of this internal split;
 - reports metrics at 25%, 50%, 75%, and 100% prefix lengths;
-- compares a majority-class reference, a TF-IDF text baseline, an orderless state-frequency ablation, and an ordered state-token n-gram classifier;
+- compares a majority-class reference, a TF-IDF text baseline, an orderless state-frequency ablation, an ordered state-token n-gram classifier, and a hybrid text-plus-state model;
 - fixes the decision threshold at 0.5 rather than tuning on the holdout; records hashes of the train/holdout ID sets and asserts zero overlap;
 - reports macro-F1, attack precision/recall/F1, PR-AUC, ROC-AUC, balanced accuracy, Brier score, confusion matrix, and a bootstrap interval for macro-F1.
 
@@ -62,7 +62,7 @@ Do not commit credentials or put passwords in screenshots. A real deployment mus
 ## 3. Recommended live demo (6–8 minutes)
 
 1. **Problem (45 seconds):** explain that moderators need early warning, not automatic punishment. The model provides a risk estimate for review.
-2. **Sequential result (90 seconds):** show the generated metrics table at 25/50/75/100%. Compare the ordered-state model with the orderless state ablation, text baseline, and majority baseline. Explain macro-F1, attack recall, PR-AUC, and the fixed 0.5 threshold. Do not cherry-pick.
+2. **Sequential result (90 seconds):** show the generated metrics table at 25/50/75/100%. Compare the hybrid model with the ordered-state and orderless ablation, text baseline, and majority baseline. Explain macro-F1, attack recall, PR-AUC, and the fixed 0.5 threshold. Do not cherry-pick.
 3. **Risk Simulator (90 seconds):** select a healthy preset, run it, then select an escalation preset and run it. Show that per-message toxicity/sentiment, conversation risk, and sequence-pattern evidence are separate signals. Note that the output is a recommendation for moderator review.
 4. **Document schema (60 seconds):** open NoSQL Lab, show one conversation document and explain why utterances are embedded.
 5. **Query and aggregation (60 seconds):** search for a known speaker, then explain every stage of the $unwind aggregation by reading its input/output shape.
@@ -94,7 +94,7 @@ Always run the demo once before assessment. Keep a backup set of screenshots and
 
 ### Results
 - [ ] Attach the successful benchmark JSON/CSV from the current branch.
-- [ ] Present every model/horizon row and the majority baseline.
+- [ ] Present every model/horizon row and the majority baseline, including the hybrid model.
 - [ ] Explain false negatives as well as false positives.
 - [ ] Do not report the official test set as freshly evaluated or claim the held-out history is untouched; this repository's earlier workflow history included access to test metrics.
 - [ ] If BERT/DistilBERT metrics are shown, identify the exact model checkpoint, data split, threshold, and generation script. Do not mix its scores with the internal TF-IDF/state-sequence holdout table.
