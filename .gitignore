@@ -18,3 +18,6 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# Generated experiment outputs (reproducible via scripts/run_sequence_benchmark.py)
+reports/generated/
