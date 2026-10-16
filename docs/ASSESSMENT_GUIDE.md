@@ -63,7 +63,7 @@ Do not commit credentials or put passwords in screenshots. A real deployment mus
 ## 3. Recommended live demo (6–8 minutes)
 
 1. **Problem (45 seconds):** explain that moderators need early warning, not automatic punishment. The model provides a risk estimate for review.
-2. **Sequential result (90 seconds):** show the generated metrics table at 25/50/75/100%. Compare the hybrid model with the ordered-state and orderless ablation, text baseline, and majority baseline. Explain macro-F1, attack recall, PR-AUC, and the fixed 0.5 threshold. Do not cherry-pick.
+2. **Sequential result (90 seconds):** use [docs/RESULTS.md](RESULTS.md) and the generated metrics table at 25/50/75/100%. Compare all models, including majority, word text, word+character text, ordered-state, orderless ablation, and hybrid. Explain macro-F1, attack recall, PR-AUC, and the fixed 0.5 threshold. Do not cherry-pick.
 3. **Risk Simulator (90 seconds):** select a healthy preset, run it, then select an escalation preset and run it. Show that per-message toxicity/sentiment, conversation risk, and sequence-pattern evidence are separate signals. Note that the output is a recommendation for moderator review.
 4. **Document schema (60 seconds):** open NoSQL Lab, show one conversation document and explain why utterances are embedded.
 5. **Query and aggregation (60 seconds):** search for a known speaker, then explain every stage of the $unwind aggregation by reading its input/output shape.
