@@ -393,8 +393,9 @@ def analyze_conversation(messages: list) -> dict:
 st.markdown('<div class="cg-eyebrow">WIKIPEDIA DISCUSSION INTELLIGENCE</div>', unsafe_allow_html=True)
 st.title("ConversationGuardian")
 st.markdown(
-    '<div class="cg-subtitle">Explore discussion risk, inspect mined escalation patterns, '
-    'and demonstrate document-database operations in one moderation workspace.</div>',
+    '<div class="cg-subtitle"><b>Problem:</b> Can the first 25–75% of a discussion help identify '
+    'conversations that are attack-labelled overall? Compare prefix-based sequence models and use '
+    'NoSQL queries, aggregation, and moderator notes to support human review.</div>',
     unsafe_allow_html=True,
 )
 if "mongomock" in database_mode:
