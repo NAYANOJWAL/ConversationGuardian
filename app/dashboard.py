@@ -799,7 +799,7 @@ with tab4:
             horizon_order = [label for label in ["25%", "50%", "75%", "100%"] if label in chart_data.index]
             chart_data = chart_data.reindex(horizon_order)
             if selected_models and not chart_data.empty:
-                st.line_chart(chart_data, y_label=metric_label)
+                st.line_chart(chart_data)
             else:
                 st.info("Select at least one model to draw the comparison.")
 
