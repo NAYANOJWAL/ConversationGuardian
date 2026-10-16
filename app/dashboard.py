@@ -103,6 +103,14 @@ def load_all():
     train_cleaned = pd.read_parquet(CLEANED_DIR / "train_cleaned.parquet")
     train_feats = pd.read_parquet(FEATURES_DIR / "train_features.parquet")
     train_seqs = pd.read_parquet(SEQUENCES_DIR / "train_sequences.parquet")
+
+    # Normalize identifier dtypes before joins/lookups; Parquet readers can infer
+    # integer/object/string IDs differently across environments.
+    for frame in (train_cleaned, train_feats, train_seqs):
+        if "conversation_id" not in frame.columns:
+            raise ValueError("Each prepared dataset must contain conversation_id.")
+        frame["conversation_id"] = frame["conversation_id"].astype(str)
+
     seq_map = train_seqs.set_index("conversation_id")["symbol_sequence"].to_dict()
 
     merged = pd.merge(
@@ -235,7 +243,7 @@ def cached_toxicity_score(text: str) -> float:
     score = toxicity_score_for_message(text)
     try:
         redis_client.incr("convoguard:stats:toxicity_cache_misses")
-        redis_client.setex(cache_key, 86400, str(score))
+        redis_client.set(cache_key, str(score), ex=86400)
     except Exception:
         pass
     return score
@@ -444,7 +452,7 @@ with tab1:
                 with st.spinner("Analyzing conversation..."):
                     try:
                         analysis_result = analyze_conversation(user_lines)
-                    except (TypeError, ValueError, RuntimeError) as exc:
+                    except Exception as exc:
                         st.session_state.pop("analysis_result", None)
                         st.session_state.pop("analysis_input", None)
                         st.error(f"Analysis could not be completed ({type(exc).__name__}). Check the app logs for details.")
