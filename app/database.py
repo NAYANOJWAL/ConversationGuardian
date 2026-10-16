@@ -53,9 +53,21 @@ def seed_reference_data(
         ("mined_patterns", pattern_docs),
         ("conversations", conversation_docs),
     ):
-        operations = _replace_operations(docs)
-        if operations:
-            db[collection_name].bulk_write(operations, ordered=False)
+        if isinstance(db.client, mongomock.MongoClient):
+            # mongomock 4.3 is not compatible with every new PyMongo bulk-replace
+            # option yet, so use its supported single-document upsert API.
+            for doc in docs:
+                if "_id" not in doc:
+                    raise ValueError(
+                        "Every MongoDB document must have an _id before seeding."
+                    )
+                db[collection_name].replace_one(
+                    {"_id": doc["_id"]}, doc, upsert=True
+                )
+        else:
+            operations = _replace_operations(docs)
+            if operations:
+                db[collection_name].bulk_write(operations, ordered=False)
 
     # Indexes make the dashboard's common queries explicit and demonstrable.
     db["conversations"].create_index(
