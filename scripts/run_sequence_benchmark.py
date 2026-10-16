@@ -132,6 +132,11 @@ def load_conversation_table(cleaned_path: Path, sequences_path: Path) -> pd.Data
         states = sequence_map.get(conversation_id, [])
         if not messages or not states:
             continue
+        if len(messages) != len(states):
+            raise ValueError(
+                f"Conversation {conversation_id!r} has {len(messages)} messages but "
+                f"{len(states)} states; prefix horizons would not refer to the same turns."
+            )
         records.append(
             {
                 "conversation_id": conversation_id,
