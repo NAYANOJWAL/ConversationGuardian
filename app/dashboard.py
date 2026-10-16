@@ -665,7 +665,98 @@ with tab3:
                 )
 
     st.markdown("---")
-    st.markdown("### 2. Moderator notes — Create, Read, Update, Delete")
+    st.markdown("### 2. Compound-index query: attack label + dataset split")
+    st.caption(
+        "This query filters the first two fields of the has_attack + split compound index. "
+        "The result count and sample documents update with the selections."
+    )
+    label_col, split_col = st.columns(2)
+    with label_col:
+        selected_label_name = st.selectbox(
+            "Conversation label",
+            ["Attack-labelled", "Healthy-labelled"],
+            key="nosql_label_filter",
+        )
+    available_splits = sorted(
+        str(value)
+        for value in db["conversations"].distinct("split")
+        if value is not None
+    )
+    if not available_splits:
+        available_splits = ["train"]
+    with split_col:
+        selected_split = st.selectbox(
+            "Dataset split",
+            available_splits,
+            key="nosql_split_filter",
+        )
+    indexed_filter = {
+        "has_attack": selected_label_name == "Attack-labelled",
+        "split": selected_split,
+    }
+    filtered_count = db["conversations"].count_documents(indexed_filter)
+    st.caption(f"Matching conversation documents: {filtered_count:,}")
+    filter_samples = list(
+        db["conversations"].find(
+            indexed_filter,
+            {
+                "_id": 0,
+                "conversation_id": 1,
+                "has_attack": 1,
+                "split": 1,
+                "utterances": 1,
+            },
+        ).limit(5)
+    )
+    if filter_samples:
+        st.dataframe(
+            pd.DataFrame(
+                [
+                    {
+                        "Conversation ID": doc.get("conversation_id"),
+                        "Label": "Attack-labelled" if doc.get("has_attack") else "Healthy-labelled",
+                        "Split": doc.get("split"),
+                        "Turns": len(doc.get("utterances", [])),
+                    }
+                    for doc in filter_samples
+                ]
+            ),
+            use_container_width=True,
+            hide_index=True,
+        )
+    else:
+        st.info("No conversations matched these filters in the currently loaded corpus.")
+
+    if st.button("Explain label/split query plan"):
+        if "mongomock" in database_mode:
+            st.info(
+                "A real server's query planner and index-usage statistics require MongoDB. "
+                "The filter itself runs in demo mode, but this is not evidence of server-side index use."
+            )
+        else:
+            try:
+                explain_result = db.command(
+                    "explain",
+                    {
+                        "find": "conversations",
+                        "filter": indexed_filter,
+                        "limit": 5,
+                    },
+                    verbosity="executionStats",
+                )
+                execution_stats = explain_result.get("executionStats", {})
+                e1, e2, e3 = st.columns(3)
+                e1.metric("Documents examined", f"{execution_stats.get('totalDocsExamined', 0):,}")
+                e2.metric("Index keys examined", f"{execution_stats.get('totalKeysExamined', 0):,}")
+                e3.metric("Returned", f"{execution_stats.get('nReturned', 0):,}")
+                with st.expander("Winning label/split query plan"):
+                    st.json(explain_result.get("queryPlanner", {}).get("winningPlan", {}))
+            except Exception as exc:
+                logger.exception("MongoDB label/split explain failed")
+                st.warning(f"Explain is unavailable ({type(exc).__name__}); check MongoDB permissions/version.")
+
+    st.markdown("---")
+    st.markdown("### 3. Moderator notes — Create, Read, Update, Delete")
     st.caption(
         "Notes are stored separately from the reference conversation corpus. "
         "Saving a note for an existing conversation creates it or updates the existing note."
@@ -731,7 +822,7 @@ with tab3:
             st.info("No moderator notes saved yet. Create one using the form.")
 
     st.markdown("---")
-    st.markdown("### 3. Aggregation pipeline: most toxic-comment speakers")
+    st.markdown("### 4. Aggregation pipeline: most toxic-comment speakers")
     st.caption(
         "Uses $unwind to expand embedded utterances, $match to filter toxicity, "
         "$group to count by speaker, then $sort and $limit."
