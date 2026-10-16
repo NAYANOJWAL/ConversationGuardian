@@ -82,11 +82,10 @@ def _mongodb_uri_from_config() -> str | None:
 
 @st.cache_resource(show_spinner="Loading ConversationGuardian models and data...")
 def load_all():
-    nltk_download_ok = False
     import nltk
 
     try:
-        nltk_download_ok = nltk.download("vader_lexicon", quiet=True)
+        nltk.download("vader_lexicon", quiet=True)
     except Exception:
         pass
 
