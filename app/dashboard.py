@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import torch
+from dotenv import load_dotenv
 from detoxify import Detoxify
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
@@ -52,8 +53,7 @@ st.markdown("""
 
 # 2. Paths
 PROJECT_DIR = Path(__file__).parent.parent.resolve()
-if not (PROJECT_DIR / "models").exists():
-    PROJECT_DIR = Path(__file__).parent.parent.resolve()
+load_dotenv(PROJECT_DIR / ".env", override=False)
 
 DATA_DIR = PROJECT_DIR / "data"
 CLEANED_DIR = DATA_DIR / "cleaned"
