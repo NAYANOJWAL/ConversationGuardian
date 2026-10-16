@@ -378,7 +378,7 @@ def analyze_conversation(messages: list) -> dict:
     elif matched_pat:
         explanation += (
             f"\n\nWeak historical match: pattern '{matched_pat['pattern_str']}' has too few healthy-case "
-            f"observations ({matched_pat.get('healthy_support', 0}) for a stable ratio; "
+            f"observations ({matched_pat.get('healthy_support', 0)}) for a stable ratio; "
             f"shown for reference only and not used in the verdict."
         )
 
