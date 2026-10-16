@@ -193,6 +193,28 @@ def _make_text_model():
     )
 
 
+def _make_state_frequency_model():
+    """Orderless ablation: use the same state vocabulary but ignore transition order."""
+    return make_pipeline(
+        TfidfVectorizer(
+            tokenizer=str.split,
+            preprocessor=None,
+            token_pattern=None,
+            lowercase=False,
+            ngram_range=(1, 1),
+            min_df=1,
+            max_features=20000,
+            sublinear_tf=True,
+        ),
+        LogisticRegression(
+            class_weight="balanced",
+            max_iter=1500,
+            random_state=SEED,
+            solver="liblinear",
+        ),
+    )
+
+
 def _make_sequence_model():
     return make_pipeline(
         TfidfVectorizer(
@@ -318,6 +340,26 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
             " ".join(take_prefix(row.states, fraction))
             for row in test.itertuples(index=False)
         ]
+
+        # Ablation: same states, but no transition/order information.
+        frequency_model = _make_state_frequency_model()
+        frequency_model.fit(train_states, y_train)
+        frequency_probability = _positive_probability(frequency_model, test_states)
+        metrics, extra = evaluate_predictions(y_test, frequency_probability)
+        results.append(
+            {
+                "model": "State-frequency ablation (orderless)",
+                "prefix_fraction": fraction,
+                "prefix_label": prefix_label,
+                "n_train": len(train),
+                "n_test": len(test),
+                **metrics,
+                "macro_f1_bootstrap_95ci": _bootstrap_macro_f1(y_test, frequency_probability),
+                **extra,
+            }
+        )
+        predictions[f"statefreq_{int(fraction * 100)}pct_probability"] = frequency_probability
+
         sequence_model = _make_sequence_model()
         sequence_model.fit(train_states, y_train)
         sequence_probability = _positive_probability(sequence_model, test_states)
