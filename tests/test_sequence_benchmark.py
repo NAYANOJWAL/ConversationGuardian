@@ -57,11 +57,12 @@ class SequenceBenchmarkTests(unittest.TestCase):
         self.assertEqual(report["n_conversations"], 40)
         self.assertEqual(report["n_train"] + report["n_test"], 40)
         self.assertEqual(report["split_integrity"]["train_holdout_id_overlap_count"], 0)
-        self.assertEqual(len(report["metrics"]), 17)
+        self.assertEqual(len(report["metrics"]), 21)
         self.assertEqual(len(predictions), report["n_test"])
         self.assertTrue(all(row["prefix_label"] for row in report["metrics"]))
         model_names = {row["model"] for row in report["metrics"]}
         self.assertIn("TF-IDF text baseline", model_names)
+        self.assertIn("Word + character TF-IDF", model_names)
         self.assertIn("State-frequency ablation (orderless)", model_names)
         self.assertIn("Ordered-state n-gram model", model_names)
         self.assertIn("Hybrid text + state sequence", model_names)
