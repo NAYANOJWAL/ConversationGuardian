@@ -9,7 +9,7 @@ ConversationGuardian is a Streamlit research/demo application for exploring poss
 - **Risk Simulator:** enter a multi-turn discussion or choose a preset. The app displays the DistilBERT conversation risk score, per-message Detoxify toxicity, VADER sentiment, state trajectory, and a supporting pattern match.
 - **Pattern Catalog:** search mined sequence patterns and inspect their historical support counts. Small healthy-case counts are labelled as limited evidence; a support ratio is not proof of causation.
 - **NoSQL Lab:** inspect the document schema, run nested-field conversation queries, view indexes, execute an aggregation pipeline, and create/read/update/delete moderator notes without modifying the reference conversation corpus.
-- **Storage modes:** connect to a real MongoDB database using the MONGODB_URI environment setting, or run in clearly labelled in-memory mongomock demo mode.
+- **Storage modes:** connect to real MongoDB using MONGODB_URI and a Redis cache using REDIS_URL, or run in clearly labelled in-memory mongomock/fakeredis demo modes.
 
 ## Architecture
 
@@ -20,7 +20,8 @@ ConversationGuardian is a Streamlit research/demo application for exploring poss
       └── Database layer (app/database.py)
            ├── conversations
            ├── mined_patterns
-           └── moderator_notes
+           ├── moderator_notes
+           └── Redis cache (toxicity scores keyed by message hash, 24-hour TTL)
 
 The dashboard loads its bundled cleaned training conversations, features, and state sequences. It does not download the raw Wikipedia discussion corpus at runtime.
 
@@ -84,13 +85,16 @@ For an actual persistent database demonstration, configure a MongoDB Atlas or lo
 Windows PowerShell example:
 
     $env:MONGODB_URI = "mongodb+srv://<user>:<password>@<cluster>/<database>?retryWrites=true&w=majority"
+    $env:REDIS_URL = "rediss://<user>:<password>@<host>:<port>"
     streamlit run app/dashboard.py
 
-For Streamlit Cloud, add a secret named MONGODB_URI in the app's settings. Ensure the Atlas network access rules allow the deployed app to connect.
+For Streamlit Cloud, add secrets named MONGODB_URI and REDIS_URL in the app's settings if using both services. Ensure the MongoDB and Redis network access rules allow the deployed app to connect.
 
 The app verifies the connection using a ping. If a URI is configured but the connection fails, startup reports a failure instead of silently switching to a fake database.
 
-When MONGODB_URI is **not set**, the app uses mongomock in-memory storage and displays a warning. It is suitable for a quick UI demo, but it is not persistent and should not be presented as a live MongoDB deployment.
+The toxicity model scores are cached in Redis using a SHA-256 message hash and a 24-hour TTL. Message text itself is not written to the cache. Without REDIS_URL, the app uses in-memory fakeredis and labels that mode explicitly.
+
+When MONGODB_URI is **not set**, the app uses mongomock in-memory storage and displays a warning. It is suitable for a quick UI demo, but it is not persistent and should not be presented as a live MongoDB deployment. When REDIS_URL is not set, fakeredis is used and its cache does not persist across restarts.
 
 ## Tests
 
@@ -98,7 +102,7 @@ Run the database layer regression tests:
 
     python -m unittest discover -s tests -v
 
-They cover explicit demo-mode labelling, idempotent reference-data seeding, preservation of moderator notes, indexes, and validation of document IDs.
+They cover explicit demo-mode labelling, in-memory cache behavior, idempotent reference-data seeding, preservation of moderator notes, indexes, and validation of document IDs.
 
 ## Important limitations
 
