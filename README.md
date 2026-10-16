@@ -118,7 +118,7 @@ Run the conversation-level early-warning benchmark:
 
     python scripts/run_sequence_benchmark.py --output reports/generated
 
-It compares a majority reference, lexical TF-IDF, orderless state frequencies, ordered state n-grams, and a hybrid text-plus-state classifier at 25%, 50%, 75%, and 100% prefixes. Results include Macro-F1, attack precision/recall/F1, PR-AUC, ROC-AUC, balanced accuracy, Brier score, confidence intervals, confusion matrices, prediction probabilities, and an audit that train/holdout conversation IDs do not overlap.
+It compares a majority reference, word TF-IDF, word-plus-character TF-IDF, orderless state frequencies, ordered state n-grams, and a hybrid text-plus-state classifier at 25%, 50%, 75%, and 100% prefixes. Results include Macro-F1, attack precision/recall/F1, PR-AUC, ROC-AUC, balanced accuracy, Brier score, confidence intervals, confusion matrices, prediction probabilities, and an audit that train/holdout conversation IDs do not overlap.
 
 The benchmark uses an internal holdout from the bundled processed training snapshot. It must not be described as official CGA-Wiki test performance. See [docs/ASSESSMENT_GUIDE.md](docs/ASSESSMENT_GUIDE.md) for the problem statement, evaluation protocol, presentation script, and viva questions. GitHub Actions also publishes benchmark outputs as a downloadable artifact.
 
