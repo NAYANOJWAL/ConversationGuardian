@@ -9,3 +9,4 @@ mongomock
 redis
 fakeredis
 pyarrow
+scikit-learn
