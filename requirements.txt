@@ -10,3 +10,4 @@ redis
 fakeredis
 pyarrow
 scikit-learn
+python-dotenv
