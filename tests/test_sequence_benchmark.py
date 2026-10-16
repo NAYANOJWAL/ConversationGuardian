@@ -56,11 +56,13 @@ class SequenceBenchmarkTests(unittest.TestCase):
         report, predictions = run_benchmark(pd.DataFrame(records))
         self.assertEqual(report["n_conversations"], 40)
         self.assertEqual(report["n_train"] + report["n_test"], 40)
-        self.assertEqual(len(report["metrics"]), 9)
+        self.assertEqual(len(report["metrics"]), 13)
         self.assertEqual(len(predictions), report["n_test"])
-        self.assertTrue(
-            all(row["0.25"] if False else row["prefix_label"] for row in report["metrics"])
-        )
+        self.assertTrue(all(row["prefix_label"] for row in report["metrics"]))
+        model_names = {row["model"] for row in report["metrics"]}
+        self.assertIn("TF-IDF text baseline", model_names)
+        self.assertIn("State-frequency ablation (orderless)", model_names)
+        self.assertIn("Ordered-state n-gram model", model_names)
         self.assertIn("not the official benchmark test set", report["interpretation_limit"])
 
 
