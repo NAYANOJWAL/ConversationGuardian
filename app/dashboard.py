@@ -1,3 +1,4 @@
+import hashlib
 import html
 import json
 import os
@@ -15,10 +16,10 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 try:
-    from app.database import connect_database, seed_reference_data
+    from app.database import connect_cache, connect_database, seed_reference_data
 except ModuleNotFoundError:
     # Supports launching Streamlit from inside the app/ directory.
-    from database import connect_database, seed_reference_data
+    from database import connect_cache, connect_database, seed_reference_data
 
 # 1. Page Config & Custom CSS Styling
 st.set_page_config(page_title="ConversationGuardian - Moderator Command Center", layout="wide")
@@ -69,15 +70,15 @@ HIGH_RISK_THRESHOLD = 0.65
 MODERATE_RISK_THRESHOLD = 0.45
 MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO = 5  # patterns below this show as "weak evidence", not a headline multiplier
 
-def _mongodb_uri_from_config() -> str | None:
-    """Read the MongoDB URI from environment variables or Streamlit secrets."""
-    uri = os.getenv("MONGODB_URI", "").strip()
-    if not uri:
+def _setting_from_config(name: str) -> str | None:
+    """Read connection settings from environment variables or Streamlit secrets."""
+    value = os.getenv(name, "").strip()
+    if not value:
         try:
-            uri = str(st.secrets.get("MONGODB_URI", "")).strip()
+            value = str(st.secrets.get(name, "")).strip()
         except Exception:
-            uri = ""
-    return uri or None
+            value = ""
+    return value or None
 
 
 @st.cache_resource(show_spinner="Loading ConversationGuardian models and data...")
@@ -136,9 +137,11 @@ def load_all():
             }
         )
 
-    mongo_client, db, database_mode = connect_database(_mongodb_uri_from_config())
+    mongo_client, db, database_mode = connect_database(
+        _setting_from_config("MONGODB_URI")
+    )
     seed_reference_data(db, mined_patterns, docs)
-    redis_client = fakeredis.FakeStrictRedis()
+    redis_client, redis_mode = connect_cache(_setting_from_config("REDIS_URL"))
 
     return (
         model,
@@ -150,6 +153,7 @@ def load_all():
         redis_client,
         device,
         database_mode,
+        redis_mode,
         mongo_client,
     )
 
@@ -165,6 +169,7 @@ try:
         redis_client,
         device,
         database_mode,
+        redis_mode,
         mongo_client,
     ) = load_all()
 except Exception as exc:
@@ -212,6 +217,31 @@ def toxicity_score_for_message(text: str) -> float:
     return float(scores[0])
 
 
+def cached_toxicity_score(text: str) -> float:
+    """Cache model scores by a message hash without storing the message in Redis."""
+    cache_key = "convoguard:v1:toxicity:" + hashlib.sha256(
+        text.encode("utf-8")
+    ).hexdigest()
+    try:
+        cached = redis_client.get(cache_key)
+        if cached is not None:
+            redis_client.incr("convoguard:stats:toxicity_cache_hits")
+            cached_score = float(cached)
+            if np.isfinite(cached_score):
+                return cached_score
+    except Exception:
+        # The app remains usable if an external cache has a transient failure.
+        pass
+
+    score = toxicity_score_for_message(text)
+    try:
+        redis_client.incr("convoguard:stats:toxicity_cache_misses")
+        redis_client.setex(cache_key, 86400, str(score))
+    except Exception:
+        pass
+    return score
+
+
 def is_prefix_match(symbol_prefix: list, mined_pattern: list) -> bool:
     if len(symbol_prefix) >= len(mined_pattern) or all(s == "POSITIVE" for s in symbol_prefix):
         return False
@@ -237,7 +267,7 @@ def analyze_conversation(messages: list) -> dict:
 
     for idx, msg in enumerate(clean_msgs):
         s_score = float(vader.polarity_scores(msg)['compound']) if msg != "[EMPTY_MESSAGE]" else 0.0
-        t_score = toxicity_score_for_message(msg) if msg != "[EMPTY_MESSAGE]" else 0.0
+        t_score = cached_toxicity_score(msg) if msg != "[EMPTY_MESSAGE]" else 0.0
 
         cites = POLICY_REGEX.findall(msg)
         is_policy = len(cites) > 0
@@ -354,6 +384,10 @@ if "mongomock" in database_mode:
     st.warning("Database is running in in-memory demo mode. Data will not persist after the app restarts. Configure MONGODB_URI to use a real MongoDB database.")
 else:
     st.success("MongoDB is connected. Reference data is upserted; collections are not dropped.")
+if "fakeredis" in redis_mode:
+    st.caption("Redis cache: in-memory demo mode; cache entries disappear on restart.")
+else:
+    st.caption("Redis cache: persistent connection enabled.")
 
 tab1, tab2, tab3 = st.tabs(["Risk Simulator", "Pattern Catalog", "NoSQL Lab"])
 
@@ -503,12 +537,15 @@ with tab3:
         'Patterns and moderator notes live in separate collections.</div></div>',
         unsafe_allow_html=True,
     )
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3, c4, c5 = st.columns(5)
     try:
         c1.metric("Conversation documents", f"{db['conversations'].count_documents({}):,}")
         c2.metric("Mined patterns", f"{db['mined_patterns'].count_documents({}):,}")
         c3.metric("Moderator notes", f"{db['moderator_notes'].count_documents({}):,}")
         c4.metric("MongoDB mode", "Persistent" if "persistent" in database_mode else "Demo")
+        cache_hits = int(redis_client.get("convoguard:stats:toxicity_cache_hits") or 0)
+        cache_misses = int(redis_client.get("convoguard:stats:toxicity_cache_misses") or 0)
+        c5.metric("Redis cache H / M", f"{cache_hits:,} / {cache_misses:,}")
     except Exception:
         st.info("Database statistics are temporarily unavailable.")
 
