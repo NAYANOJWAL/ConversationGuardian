@@ -56,6 +56,7 @@ class SequenceBenchmarkTests(unittest.TestCase):
         report, predictions = run_benchmark(pd.DataFrame(records))
         self.assertEqual(report["n_conversations"], 40)
         self.assertEqual(report["n_train"] + report["n_test"], 40)
+        self.assertEqual(report["split_integrity"]["train_holdout_id_overlap_count"], 0)
         self.assertEqual(len(report["metrics"]), 13)
         self.assertEqual(len(predictions), report["n_test"])
         self.assertTrue(all(row["prefix_label"] for row in report["metrics"]))
