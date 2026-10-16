@@ -14,7 +14,7 @@ class DatabaseLayerTests(unittest.TestCase):
     def test_demo_cache_supports_get_set_and_counters(self):
         cache, mode = connect_cache()
         self.assertIn("fakeredis", mode.lower())
-        cache.setex("test-key", 60, "0.25")
+        cache.set("test-key", "0.25", ex=60)
         self.assertEqual(cache.get("test-key"), "0.25")
         cache.incr("test-counter")
         self.assertEqual(int(cache.get("test-counter")), 1)
