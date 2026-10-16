@@ -34,7 +34,7 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import FeatureUnion, make_pipeline
 
 SEED = 42
 PREFIX_FRACTIONS = (0.25, 0.50, 0.75, 1.0)
@@ -219,6 +219,45 @@ def _make_text_model():
     )
 
 
+def _make_word_char_text_model():
+    """A stronger lexical baseline combining word and character n-grams."""
+    features = FeatureUnion(
+        transformer_list=[
+            (
+                "word",
+                TfidfVectorizer(
+                    lowercase=True,
+                    strip_accents="unicode",
+                    ngram_range=(1, 2),
+                    min_df=2,
+                    max_features=50000,
+                    sublinear_tf=True,
+                ),
+            ),
+            (
+                "character",
+                TfidfVectorizer(
+                    analyzer="char_wb",
+                    ngram_range=(3, 5),
+                    min_df=2,
+                    max_features=50000,
+                    sublinear_tf=True,
+                ),
+            ),
+        ],
+        transformer_weights={"word": 1.0, "character": 0.75},
+    )
+    return make_pipeline(
+        features,
+        LogisticRegression(
+            class_weight="balanced",
+            max_iter=1500,
+            random_state=SEED,
+            solver="liblinear",
+        ),
+    )
+
+
 def _make_state_frequency_model():
     """Orderless ablation: use the same state vocabulary but ignore transition order."""
     return make_pipeline(
@@ -263,17 +302,28 @@ def _make_sequence_model():
 
 
 def _make_hybrid_model():
-    """Combine prefix message text with ordered state n-grams."""
+    """Combine word/character text features with ordered state n-grams."""
     features = ColumnTransformer(
         transformers=[
             (
-                "text",
+                "word_text",
                 TfidfVectorizer(
                     lowercase=True,
                     strip_accents="unicode",
                     ngram_range=(1, 2),
                     min_df=2,
-                    max_features=60000,
+                    max_features=50000,
+                    sublinear_tf=True,
+                ),
+                "text",
+            ),
+            (
+                "character_text",
+                TfidfVectorizer(
+                    analyzer="char_wb",
+                    ngram_range=(3, 5),
+                    min_df=2,
+                    max_features=50000,
                     sublinear_tf=True,
                 ),
                 "text",
@@ -293,7 +343,11 @@ def _make_hybrid_model():
                 "states",
             ),
         ],
-        transformer_weights={"text": 1.0, "states": 1.0},
+        transformer_weights={
+            "word_text": 1.0,
+            "character_text": 0.75,
+            "states": 1.0,
+        },
     )
     return make_pipeline(
         features,
@@ -304,7 +358,6 @@ def _make_hybrid_model():
             solver="liblinear",
         ),
     )
-
 
 def _positive_probability(model, values: list[str]) -> np.ndarray:
     probabilities = model.predict_proba(values)
@@ -401,6 +454,26 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
             }
         )
         predictions[f"text_{int(fraction * 100)}pct_probability"] = text_probability
+
+        # Character n-grams can capture misspellings, obfuscated insults, and
+        # informal spelling patterns that word-level tokenization misses.
+        word_char_model = _make_word_char_text_model()
+        word_char_model.fit(train_text, y_train)
+        word_char_probability = _positive_probability(word_char_model, test_text)
+        metrics, extra = evaluate_predictions(y_test, word_char_probability)
+        results.append(
+            {
+                "model": "Word + character TF-IDF",
+                "prefix_fraction": fraction,
+                "prefix_label": prefix_label,
+                "n_train": len(train),
+                "n_test": len(test),
+                **metrics,
+                "macro_f1_bootstrap_95ci": _bootstrap_macro_f1(y_test, word_char_probability),
+                **extra,
+            }
+        )
+        predictions[f"wordchar_{int(fraction * 100)}pct_probability"] = word_char_probability
 
         train_states = [
             " ".join(take_prefix(row.states, fraction))
@@ -510,9 +583,10 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
         "model_descriptions": {
             "Majority-class reference": "Constant probability from the majority label in the training split.",
             "TF-IDF text baseline": "Word unigram/bigram TF-IDF + balanced logistic regression on prefix text.",
+            "Word + character TF-IDF": "Word unigram/bigram plus character 3-5-gram TF-IDF + balanced logistic regression.",
             "State-frequency ablation (orderless)": "State-token unigram TF-IDF + balanced logistic regression; ignores transition order.",
             "Ordered-state n-gram model": "State-token 1-3-gram TF-IDF + balanced logistic regression; retains local event order.",
-            "Hybrid text + state sequence": "Concatenated text word 1-2-gram TF-IDF and state-token 1-3-gram TF-IDF + balanced logistic regression.",
+            "Hybrid text + state sequence": "Concatenated word 1-2-gram text, character 3-5-gram text, and ordered state-token 1-3-gram TF-IDF + balanced logistic regression.",
         },
         "metrics": results,
     }
