@@ -12,6 +12,8 @@ import ast
 import hashlib
 import json
 import math
+import os
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -35,6 +37,23 @@ from sklearn.pipeline import make_pipeline
 
 SEED = 42
 PREFIX_FRACTIONS = (0.25, 0.50, 0.75, 1.0)
+
+
+def _source_revision() -> str:
+    """Record the exact code revision when running in Git or GitHub Actions."""
+    revision = os.getenv("GITHUB_SHA", "").strip()
+    if revision:
+        return revision
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return result.stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return "unrecorded-local-revision"
 
 
 def _to_binary_label(value: Any) -> int:
@@ -407,6 +426,7 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
             "not the official benchmark test set and not a replacement for external validation."
         ),
         "random_seed": SEED,
+        "source_revision": _source_revision(),
         "prefix_fractions": list(PREFIX_FRACTIONS),
         "n_conversations": int(len(frame)),
         "n_train": int(len(train)),
