@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install database test dependencies
-        run: python -m pip install --upgrade pip pymongo mongomock
+        run: python -m pip install --upgrade pip pymongo mongomock redis fakeredis
       - name: Check Python syntax
         run: python -m compileall -q app tests
       - name: Run database regression tests
