@@ -372,7 +372,9 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
         "train_attack_prevalence": float(y_train.mean()),
         "test_attack_prevalence": float(y_test.mean()),
         "positive_label": "has_attack=1",
-        "metrics": metric_frame.to_dict(orient="records"),
+        # Keep None (for the reference model's prefix fraction) as JSON null.
+        # Passing through a DataFrame would coerce that mixed column to NaN.
+        "metrics": results,
         "best_early_sequence_model_by_macro_f1": best_model,
     }
     return report, predictions
