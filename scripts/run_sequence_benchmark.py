@@ -535,8 +535,10 @@ def main() -> None:
 
     json_path.write_text(json.dumps(report, indent=2, allow_nan=False), encoding="utf-8")
     predictions.to_csv(csv_path, index=False)
+    # Keep the bootstrap interval in the flat summary so the UI and report
+    # show uncertainty alongside the point estimate.
     pd.DataFrame(report["metrics"]).drop(
-        columns=["confusion_matrix", "macro_f1_bootstrap_95ci"], errors="ignore"
+        columns=["confusion_matrix"], errors="ignore"
     ).to_csv(metrics_path, index=False)
 
     summary_columns = [
