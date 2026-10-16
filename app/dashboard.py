@@ -136,6 +136,18 @@ def map_state_locked(sentiment: float, toxicity: float, has_policy_cite: bool, t
     elif is_pos: return "POSITIVE"
     else: return "NEUTRAL"
 
+def toxicity_score_for_message(text: str) -> float:
+    """Extract one toxicity score across Detoxify's scalar and sequence output forms."""
+    prediction = detoxify_model.predict(text)
+    if not isinstance(prediction, dict) or "toxicity" not in prediction:
+        raise ValueError("Detoxify prediction did not contain a 'toxicity' score.")
+
+    scores = np.asarray(prediction["toxicity"], dtype=float).reshape(-1)
+    if scores.size != 1 or not np.isfinite(scores[0]):
+        raise ValueError("Detoxify returned an invalid toxicity score for one message.")
+    return float(scores[0])
+
+
 def is_prefix_match(symbol_prefix: list, mined_pattern: list) -> bool:
     if len(symbol_prefix) >= len(mined_pattern) or all(s == "POSITIVE" for s in symbol_prefix):
         return False
@@ -161,7 +173,7 @@ def analyze_conversation(messages: list) -> dict:
 
     for idx, msg in enumerate(clean_msgs):
         s_score = float(vader.polarity_scores(msg)['compound']) if msg != "[EMPTY_MESSAGE]" else 0.0
-        t_score = float(detoxify_model.predict([msg])['toxicity'][0]) if msg != "[EMPTY_MESSAGE]" else 0.0
+        t_score = toxicity_score_for_message(msg) if msg != "[EMPTY_MESSAGE]" else 0.0
 
         cites = POLICY_REGEX.findall(msg)
         is_policy = len(cites) > 0
@@ -316,14 +328,22 @@ with tab1:
 
         run_btn = st.button("Run Derailment Risk Analysis", type="primary", use_container_width=True)
 
-        if run_btn or user_lines:
-            res = analyze_conversation(user_lines)
+        if run_btn:
+            with st.spinner("Analyzing conversation..."):
+                st.session_state["analysis_result"] = analyze_conversation(user_lines)
+                st.session_state["analysis_input"] = list(user_lines)
 
+        res = st.session_state.get("analysis_result")
+        has_result = res is not None
+        if has_result and st.session_state.get("analysis_input") != user_lines:
+            st.caption("The input has changed since the last analysis. Click **Run Derailment Risk Analysis** to refresh results.")
+
+        if has_result:
             st.markdown("#### Turn-by-Turn Moderator Chat Feed")
             for item in res["msg_details"]:
                 st.markdown(
                     f'<div class="{item["card_class"]}">'
-                    f'<b>Turn {item["index"]}:</b> {item["text"]}<br/>'
+                    f'<b>Turn {item["index"]}:</b> {html.escape(item["text"])}<br/>'
                     f'<div class="meta-tag">State Tag: <code>{item["state"]}</code> | Toxicity: <b>{item["toxicity"]:.1%}</b> | Sentiment: <b>{item["sentiment"]:+.2f}</b></div>'
                     f'</div>',
                     unsafe_allow_html=True
@@ -331,7 +351,7 @@ with tab1:
 
     with col_results:
         st.subheader("Moderator Intelligence Board")
-        if run_btn or user_lines:
+        if has_result:
             m1, m2, m3 = st.columns(3)
             m1.metric("DistilBERT Risk Score", f"{res['risk_score']:.1%}")
             m2.metric("Matched Pattern ID", str(res['matched_pattern']['pattern_id']) if res['matched_pattern'] else "None")
@@ -382,10 +402,13 @@ with tab3:
     query_speaker = st.text_input("Filter MongoDB Conversations by Speaker Name:", value="Jytdog")
     if query_speaker:
         matching_docs = list(db["conversations"].find({"utterances.speaker": query_speaker}).limit(1))
-        st.write(f"Found matching conversation documents in MongoDB for speaker `{query_speaker}`. Note the Embedded Schema pattern:")
-        for d in matching_docs:
-            d.pop("_id", None)
-            st.json(d)
+        if matching_docs:
+            st.write(f"Found matching conversation documents in MongoDB for speaker `{query_speaker}`. Note the Embedded Schema pattern:")
+            for d in matching_docs:
+                d.pop("_id", None)
+                st.json(d)
+        else:
+            st.info(f"No conversation documents found for speaker `{query_speaker}`.")
 
     st.markdown("---")
     st.markdown("#### MongoDB `$unwind` Aggregation Pipeline Analytics")
