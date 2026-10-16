@@ -337,7 +337,7 @@ def analyze_conversation(messages: list) -> dict:
             f"Do not remove a comment solely because of this score."
         )
     elif risk_score >= HIGH_RISK_THRESHOLD:
-        decision = "HIGH RISK (MODEL-PREDICTED ESCALATION)"
+        decision = "HIGH MODEL SCORE (REVIEW REQUIRED)"
         explanation = (
             f"High model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
             f"This score is not established as calibrated, and this full-thread simulator is not by itself "
@@ -345,14 +345,14 @@ def analyze_conversation(messages: list) -> dict:
             f"Recommended Moderator Action: Flag the thread for human moderator review."
         )
     elif risk_score >= MODERATE_RISK_THRESHOLD:
-        decision = "MODERATE RISK"
+        decision = "MODERATE MODEL SCORE"
         explanation = (
             f"Moderate model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
             f"The score is not established as calibrated.\n\n"
             f"Recommended Moderator Action: Review context and monitor the thread."
         )
     else:
-        decision = "LOW RISK (HEALTHY CONVERSATION)"
+        decision = "LOW MODEL SCORE (NOT A SAFETY GUARANTEE)"
         explanation = (
             f"Lower model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
             f"This does not prove the conversation is safe or that no attack will occur.\n\n"
@@ -437,6 +437,11 @@ with tab1:
 
     with col_input:
         st.subheader("Input Thread Simulator")
+        st.caption(
+            "This simulator scores the messages you provide. Use the Sequential Results tab for "
+            "measured prefix-horizon comparisons; the full-thread model score is not itself a "
+            "validated early-warning benchmark."
+        )
 
         input_mode = st.radio("Choose Input Method:", ["Scenario Presets", "Custom Typing (Multiline)"], horizontal=True)
 
@@ -504,9 +509,12 @@ with tab1:
             else:
                 m3.metric("Pattern Support Ratio", "N/A")
 
-            if "HIGH RISK" in res['decision']: st.error(f"**Verdict:** {res['decision']}")
-            elif "MODERATE" in res['decision']: st.warning(f"**Verdict:** {res['decision']}")
-            else: st.success(f"**Verdict:** {res['decision']}")
+            if "HIGH" in res["decision"]:
+                st.error(f"**Triage signal:** {res['decision']}")
+            elif "MODERATE" in res["decision"]:
+                st.warning(f"**Triage signal:** {res['decision']}")
+            else:
+                st.info(f"**Triage signal:** {res['decision']}")
 
             st.write(f"**State Trajectory Flow:** `{' -> '.join(res['states'])}`")
             st.info(res['explanation'])
