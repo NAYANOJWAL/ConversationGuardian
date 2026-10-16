@@ -104,6 +104,16 @@ Run the database layer regression tests:
 
 They cover explicit demo-mode labelling, in-memory cache behavior, idempotent reference-data seeding, preservation of moderator notes, indexes, and validation of document IDs.
 
+## Sequential modeling and experimental results
+
+Run the conversation-level early-warning benchmark:
+
+    python scripts/run_sequence_benchmark.py --output reports/generated
+
+It compares a majority reference, lexical TF-IDF, orderless state frequencies, and ordered state n-grams at 25%, 50%, 75%, and 100% prefixes. Results include Macro-F1, attack precision/recall/F1, PR-AUC, ROC-AUC, balanced accuracy, Brier score, confidence intervals, confusion matrices, prediction probabilities, and an audit that train/holdout conversation IDs do not overlap.
+
+The benchmark uses an internal holdout from the bundled processed training snapshot. It must not be described as official CGA-Wiki test performance. See [docs/ASSESSMENT_GUIDE.md](docs/ASSESSMENT_GUIDE.md) for the problem statement, evaluation protocol, presentation script, and viva questions. GitHub Actions also publishes benchmark outputs as a downloadable artifact.
+
 ## Important limitations
 
 - The configured risk thresholds are currently hand-set defaults and still need validation-set calibration before being described as statistically calibrated.
