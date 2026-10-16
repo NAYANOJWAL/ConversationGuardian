@@ -20,7 +20,10 @@ def connect_database(mongodb_uri: str | None = None) -> tuple[Any, Database, str
         client = MongoClient(mongodb_uri.strip(), serverSelectionTimeoutMS=5000)
         # Fail early and clearly if the provided connection string is not usable.
         client.admin.command("ping")
-        return client, client["ConversationGuardian"], "MongoDB connected (persistent)"
+        # Respect the database name embedded in the URI; use the project default
+        # only when the URI does not specify one.
+        database = client.get_default_database(default="ConversationGuardian")
+        return client, database, f"MongoDB connected (persistent: {database.name})"
 
     client = mongomock.MongoClient()
     return client, client["ConversationGuardian"], "Demo mode: mongomock (in-memory, not persistent)"
