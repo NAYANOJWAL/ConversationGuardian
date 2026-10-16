@@ -1,0 +1,20 @@
+# Local secrets and connection configuration
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local operating-system/editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
