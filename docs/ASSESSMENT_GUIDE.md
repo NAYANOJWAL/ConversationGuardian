@@ -19,7 +19,7 @@ The reproducible benchmark in scripts/run_sequence_benchmark.py:
 - holds out conversations, never individual comments, to prevent comments from the same thread crossing the train/holdout boundary;
 - trains only on the training portion of this internal split;
 - reports metrics at 25%, 50%, 75%, and 100% prefix lengths;
-- compares a majority-class reference, a TF-IDF text baseline, an orderless state-frequency ablation, an ordered state-token n-gram classifier, and a hybrid text-plus-state model;
+- compares a majority-class reference, a word TF-IDF baseline, a word-plus-character TF-IDF baseline, an orderless state-frequency ablation, an ordered state-token n-gram classifier, and a hybrid text-plus-state model;
 - fixes the decision threshold at 0.5 rather than tuning on the holdout; records hashes of the train/holdout ID sets and asserts zero overlap;
 - reports macro-F1, attack precision/recall/F1, PR-AUC, ROC-AUC, balanced accuracy, Brier score, confusion matrix, and a bootstrap interval for macro-F1.
 
