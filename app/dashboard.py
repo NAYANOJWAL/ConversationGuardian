@@ -1,6 +1,7 @@
 import hashlib
 import html
 import json
+import logging
 import os
 import re
 from datetime import datetime, timezone
@@ -13,6 +14,8 @@ import torch
 from detoxify import Detoxify
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+logger = logging.getLogger(__name__)
 
 try:
     from app.database import connect_cache, connect_database, seed_reference_data
@@ -180,6 +183,7 @@ try:
         mongo_client,
     ) = load_all()
 except Exception as exc:
+    logger.exception("ConversationGuardian startup failed")
     st.error(
         "ConversationGuardian could not finish loading. Check the app logs for "
         "model downloads, dataset files, or MongoDB connection problems."
@@ -314,9 +318,9 @@ def analyze_conversation(messages: list) -> dict:
     # `decision` (the verdict banner) is a function of risk_score and
     # max_toxicity ONLY. Policy citations and pattern matches are informational
     # context added to `explanation` - they can NEVER change the verdict.
-    # This was previously an override (policy citations downgraded high-risk
-    # scores to "Moderate"); an ablation study showed that override reduced
-    # recall by 14 points, so it has been removed. Do not reintroduce it.
+    # Policy citations and mined patterns are explanatory context only. Do not
+    # change the verdict based on a policy-citation heuristic or an unsupported
+    # claim about predictive value.
     # =========================================================================
     pattern_is_trustworthy = (
         matched_pat is not None
@@ -324,30 +328,35 @@ def analyze_conversation(messages: list) -> dict:
     )
 
     if max_toxicity >= 0.3597:
-        decision = "HIGH RISK (PERSONAL ATTACK DETECTED)"
+        decision = "HIGH RISK (TOXICITY FLAG — REVIEW REQUIRED)"
         explanation = (
-            f"Personal Attack Detected: Toxic language detected in message text (Peak Toxicity: {max_toxicity:.1%}).\n\n"
-            f"Recommended Moderator Action: Remove toxic comment immediately and issue user warning per WP:CIVIL guidelines."
+            f"Toxicity flag: the toxicity model score reached {max_toxicity:.1%}. "
+            f"Toxicity alone does not prove a targeted personal attack; context, quotation, "
+            f"and the intended target matter.\n\n"
+            f"Recommended Moderator Action: Review the flagged message and surrounding turns. "
+            f"Do not remove a comment solely because of this score."
         )
     elif risk_score >= HIGH_RISK_THRESHOLD:
         decision = "HIGH RISK (MODEL-PREDICTED ESCALATION)"
         explanation = (
-            f"High Risk Predicted: DistilBERT model predicts a {risk_score:.1%} derailment probability "
-            f"from text content alone (no toxic language detected yet - this is an early warning).\n\n"
-            f"Recommended Moderator Action: Flag thread for moderator review."
+            f"High model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
+            f"This score is not established as calibrated, and this full-thread simulator is not by itself "
+            f"evidence of forecast accuracy.\n\n"
+            f"Recommended Moderator Action: Flag the thread for human moderator review."
         )
     elif risk_score >= MODERATE_RISK_THRESHOLD:
         decision = "MODERATE RISK"
         explanation = (
-            f"Moderate Risk: DistilBERT predicts a {risk_score:.1%} derailment probability - "
-            f"elevated but not high-confidence.\n\n"
-            f"Recommended Moderator Action: Monitor thread."
+            f"Moderate model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
+            f"The score is not established as calibrated.\n\n"
+            f"Recommended Moderator Action: Review context and monitor the thread."
         )
     else:
         decision = "LOW RISK (HEALTHY CONVERSATION)"
         explanation = (
-            f"Healthy Conversation: DistilBERT risk score is {risk_score:.1%}. Language remains civil.\n\n"
-            f"Recommended Moderator Action: No moderator intervention required."
+            f"Lower model score: DistilBERT returned a {risk_score:.1%} softmax score for its positive class. "
+            f"This does not prove the conversation is safe or that no attack will occur.\n\n"
+            f"Recommended Moderator Action: No immediate flag from this model score; use moderator judgment."
         )
 
     # --- Informational context only - never changes `decision` above ---
@@ -355,21 +364,22 @@ def analyze_conversation(messages: list) -> dict:
         cites_str = ", ".join(set(found_cites))
         explanation += (
             f"\n\nContext: Wikipedia policy citations detected ({cites_str}). "
-            f"This is shown for context only and does not affect the risk tier - "
-            f"our ablation study found policy citations do not reliably predict lower risk."
+            f"This is shown for context only and does not affect the risk tier. "
+            f"A policy citation should not be treated as proof that a conversation is safe."
         )
 
     if pattern_is_trustworthy:
         explanation += (
             f"\n\nHistorical evidence: sequence matches pattern '{matched_pat['pattern_str']}' "
-            f"({matched_pat['derailed_support']} derailed vs {matched_pat['healthy_support']} healthy past cases, "
-            f"{matched_pat['support_ratio']}x multiplier)."
+            f"({matched_pat['derailed_support']} attack-labelled vs {matched_pat['healthy_support']} healthy historical cases; "
+            f"support ratio {matched_pat['support_ratio']}). This is descriptive historical evidence, not a causal effect "
+            f"and does not multiply the DistilBERT score."
         )
     elif matched_pat:
         explanation += (
             f"\n\nWeak historical match: pattern '{matched_pat['pattern_str']}' has too few healthy-case "
-            f"observations ({matched_pat.get('healthy_support', 0)}) for a statistically reliable multiplier - "
-            f"shown for reference only, not used in the verdict."
+            f"observations ({matched_pat.get('healthy_support', 0}) for a stable ratio; "
+            f"shown for reference only and not used in the verdict."
         )
 
     return {
@@ -453,6 +463,7 @@ with tab1:
                     try:
                         analysis_result = analyze_conversation(user_lines)
                     except Exception as exc:
+                        logger.exception("Conversation analysis failed")
                         st.session_state.pop("analysis_result", None)
                         st.session_state.pop("analysis_input", None)
                         st.error(f"Analysis could not be completed ({type(exc).__name__}). Check the app logs for details.")
@@ -486,12 +497,12 @@ with tab1:
             m1.metric("DistilBERT Risk Score", f"{res['risk_score']:.1%}")
             m2.metric("Matched Pattern ID", str(res['matched_pattern']['pattern_id']) if res['matched_pattern'] else "None")
             if res['matched_pattern']:
-                ratio_label = f"{float(res['matched_pattern']['support_ratio']):.1f}x"
+                ratio_label = f"{float(res['matched_pattern']['support_ratio']):.2f}"
                 if not res['pattern_is_trustworthy']:
-                    ratio_label += " (weak evidence)"
-                m3.metric("Risk Multiplier", ratio_label)
+                    ratio_label += " (limited support)"
+                m3.metric("Pattern Support Ratio", ratio_label)
             else:
-                m3.metric("Risk Multiplier", "1.0x")
+                m3.metric("Pattern Support Ratio", "N/A")
 
             if "HIGH RISK" in res['decision']: st.error(f"**Verdict:** {res['decision']}")
             elif "MODERATE" in res['decision']: st.warning(f"**Verdict:** {res['decision']}")
@@ -516,10 +527,10 @@ with tab1:
 
 with tab2:
     st.subheader(f"PrefixSpan Pattern Catalog Explorer ({len(mined_patterns)} Mined Trajectories)")
-    st.markdown("Searchable catalog of all leak-free escalation trajectories mined from Wikipedia history.")
+    st.markdown("Searchable catalog of state trajectories mined from the bundled processed conversations.")
     st.caption(
         f"Note: patterns with fewer than {MIN_HEALTHY_SUPPORT_FOR_TRUSTED_RATIO} healthy-case observations "
-        f"have statistically unstable support ratios - treat their multiplier as illustrative, not precise."
+        f"have limited evidence; treat their support ratios as descriptive, not precise risk multipliers."
     )
     p_df = pd.DataFrame(mined_patterns)[['pattern_id', 'pattern_str', 'pattern_length', 'support_ratio', 'derailed_support', 'healthy_support']]
     p_df['Evidence strength'] = np.where(
