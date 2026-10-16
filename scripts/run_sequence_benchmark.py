@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -378,20 +379,14 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
         )
         predictions[f"sequence_{int(fraction * 100)}pct_probability"] = sequence_probability
 
-    metric_frame = pd.DataFrame(results)
-    best_early = metric_frame[
-        (metric_frame["model"] == "Ordered-state n-gram model")
-        & (metric_frame["prefix_fraction"].isin([0.25, 0.50, 0.75]))
-    ].sort_values("macro_f1", ascending=False)
-    best_model = (
-        {
-            "model": str(best_early.iloc[0]["model"]),
-            "prefix_fraction": float(best_early.iloc[0]["prefix_fraction"]),
-            "macro_f1": float(best_early.iloc[0]["macro_f1"]),
-        }
-        if not best_early.empty
-        else None
-    )
+    train_ids = sorted(train["conversation_id"].astype(str).tolist())
+    test_ids = sorted(test["conversation_id"].astype(str).tolist())
+    overlap_count = len(set(train_ids).intersection(test_ids))
+    if overlap_count:
+        raise RuntimeError("Data leakage detected: conversation IDs overlap between train and holdout.")
+
+    def hash_ids(ids: list[str]) -> str:
+        return hashlib.sha256("\n".join(ids).encode("utf-8")).hexdigest()
 
     report: dict[str, Any] = {
         "title": "ConversationGuardian early-warning sequence benchmark",
@@ -414,10 +409,20 @@ def run_benchmark(frame: pd.DataFrame, test_size: float = 0.20) -> tuple[dict[st
         "train_attack_prevalence": float(y_train.mean()),
         "test_attack_prevalence": float(y_test.mean()),
         "positive_label": "has_attack=1",
-        # Keep None (for the reference model's prefix fraction) as JSON null.
-        # Passing through a DataFrame would coerce that mixed column to NaN.
+        "split_integrity": {
+            "split_unit": "conversation_id",
+            "train_holdout_id_overlap_count": overlap_count,
+            "train_conversation_id_set_sha256": hash_ids(train_ids),
+            "holdout_conversation_id_set_sha256": hash_ids(test_ids),
+            "source_splits_in_snapshot": sorted(frame["source_split"].astype(str).unique().tolist()),
+        },
+        "model_descriptions": {
+            "Majority-class reference": "Constant probability from the majority label in the training split.",
+            "TF-IDF text baseline": "Word unigram/bigram TF-IDF + balanced logistic regression on prefix text.",
+            "State-frequency ablation (orderless)": "State-token unigram TF-IDF + balanced logistic regression; ignores transition order.",
+            "Ordered-state n-gram model": "State-token 1-3-gram TF-IDF + balanced logistic regression; retains local event order.",
+        },
         "metrics": results,
-        "best_early_sequence_model_by_macro_f1": best_model,
     }
     return report, predictions
 
@@ -456,7 +461,7 @@ def main() -> None:
     print(json.dumps({k: report[k] for k in (
         "title", "data_source", "evaluation_protocol", "interpretation_limit",
         "n_conversations", "n_train", "n_test", "train_attack_prevalence",
-        "test_attack_prevalence", "best_early_sequence_model_by_macro_f1",
+        "test_attack_prevalence", "split_integrity",
     )}, indent=2))
     print("\nRESULTS (threshold=0.5; conversation-level holdout)")
     print(summary[summary_columns].to_string(index=False, float_format=lambda value: f"{value:.4f}"))
