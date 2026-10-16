@@ -78,6 +78,12 @@ Windows PowerShell:
 
 The first run may download model files from Hugging Face and the Detoxify model. Keep internet access available for the initial run.
 
+Optional local settings can be loaded from a .env file:
+
+    Copy-Item .env.example .env
+
+Edit the values only when using persistent services. Never commit .env; the repository ignores it. The default in-memory demo modes work without service credentials.
+
 ## Use a real MongoDB database
 
 For an actual persistent database demonstration, configure a MongoDB Atlas or local MongoDB connection string in the environment. Do not commit credentials into this repository.
@@ -103,6 +109,8 @@ Run the database layer regression tests:
     python -m unittest discover -s tests -v
 
 They cover explicit demo-mode labelling, in-memory cache behavior, idempotent reference-data seeding, preservation of moderator notes, indexes, and validation of document IDs.
+
+For a course-ready explanation of the MongoDB document schema, embedding decision, indexes, query plan, aggregation, CRUD, and Redis cache, see [docs/NOSQL_DESIGN.md](docs/NOSQL_DESIGN.md).
 
 ## Sequential modeling and experimental results
 
