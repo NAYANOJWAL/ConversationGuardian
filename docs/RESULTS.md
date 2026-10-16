@@ -29,8 +29,8 @@ The 25%, 50%, and 75% rows represent early-warning horizons. The 100% row is a f
 | Model | Prefix | Accuracy | Macro-F1 | Attack recall | PR-AUC | ROC-AUC |
 |---|---:|---:|---:|---:|---:|---:|
 | Majority-class reference | Reference | 0.5000 | 0.3333 | 0.0000 | 0.5000 | 0.5000 |
-| TF-IDF text baseline | 25% | 0.5438 | 0.5437 | 0.5618 | 0.5400 | 0.5670 |
-| Word + character TF-IDF | 25% | 0.5418 | 0.5418 | 0.5299 | 0.5538 | 0.5730 |
+| TF-IDF text baseline | 25% | 0.5438 | 0.5437 | **0.5618** | 0.5400 | 0.5670 |
+| Word + character TF-IDF | 25% | 0.5418 | 0.5418 | 0.5299 | **0.5538** | 0.5730 |
 | State-frequency (orderless) | 25% | 0.5219 | 0.5145 | 0.3984 | 0.5396 | 0.5382 |
 | Ordered-state n-gram | 25% | 0.5458 | 0.5193 | 0.3108 | 0.5266 | 0.5272 |
 | Hybrid text + state sequence | 25% | **0.5657** | **0.5647** | 0.5179 | 0.5531 | **0.5808** |
