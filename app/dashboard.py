@@ -329,14 +329,29 @@ with tab1:
         run_btn = st.button("Run Derailment Risk Analysis", type="primary", use_container_width=True)
 
         if run_btn:
-            with st.spinner("Analyzing conversation..."):
-                st.session_state["analysis_result"] = analyze_conversation(user_lines)
-                st.session_state["analysis_input"] = list(user_lines)
+            if not user_lines:
+                st.warning("Enter at least one non-empty message before running analysis.")
+                st.session_state.pop("analysis_result", None)
+                st.session_state.pop("analysis_input", None)
+            else:
+                with st.spinner("Analyzing conversation..."):
+                    try:
+                        analysis_result = analyze_conversation(user_lines)
+                    except (TypeError, ValueError, RuntimeError) as exc:
+                        st.session_state.pop("analysis_result", None)
+                        st.session_state.pop("analysis_input", None)
+                        st.error(f"Analysis could not be completed ({type(exc).__name__}). Check the app logs for details.")
+                    else:
+                        st.session_state["analysis_result"] = analysis_result
+                        st.session_state["analysis_input"] = list(user_lines)
 
         res = st.session_state.get("analysis_result")
-        has_result = res is not None
-        if has_result and st.session_state.get("analysis_input") != user_lines:
-            st.caption("The input has changed since the last analysis. Click **Run Derailment Risk Analysis** to refresh results.")
+        has_result = (
+            res is not None
+            and st.session_state.get("analysis_input") == user_lines
+        )
+        if res is not None and not has_result:
+            st.info("The input has changed since the last analysis. Click **Run Derailment Risk Analysis** to refresh the results.")
 
         if has_result:
             st.markdown("#### Turn-by-Turn Moderator Chat Feed")
