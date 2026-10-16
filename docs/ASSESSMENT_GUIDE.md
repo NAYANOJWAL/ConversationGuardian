@@ -43,6 +43,7 @@ The NoSQL Lab demonstrates:
 - a separate mined_patterns collection for reusable pattern metadata;
 - a separate moderator_notes collection for mutable moderation notes, so the reference corpus is not altered;
 - nested-field queries, such as utterances.speaker;
+- a compound-field query on has_attack + split, illustrating how a filter maps to an index;
 - a multi-stage aggregation pipeline using $unwind, $match, $group, $sort, and $limit;
 - indexes matched to query patterns;
 - optional Redis cache for toxicity scores, with a SHA-256 key and 24-hour TTL.
